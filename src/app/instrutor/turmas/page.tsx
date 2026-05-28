@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import {
   Users,
@@ -22,7 +23,7 @@ import {
 type ClassStatus = "em_andamento" | "agendada" | "concluida";
 
 interface TrainingClass {
-  id: number;
+  id: string | number;
   company: string;
   companyType: "Indústria" | "Escola" | "Outros";
   training: string;
@@ -155,7 +156,7 @@ export default function TurmasPage() {
       .then(({ data, error }) => {
         if (!error && data && data.length > 0) {
           const mapped: TrainingClass[] = (data as any[]).map((row, i) => ({
-            id: i + 1,
+            id: row.id,
             company: row.company?.name ?? "Empresa",
             companyType: (row.company?.type ?? "Outros") as TrainingClass["companyType"],
             training: row.training?.name ?? "Treinamento",
@@ -207,13 +208,14 @@ export default function TurmasPage() {
             Gerencie suas turmas de treinamento ativas e agendadas.
           </p>
         </div>
-        <button
+        <Link
           id="new-turma-btn"
+          href="/instrutor/comercial"
           className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-fire-gradient-strong text-white text-sm font-semibold shadow-md shadow-primary/20 transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
         >
           <Plus className="w-4 h-4" />
           Nova Turma
-        </button>
+        </Link>
       </div>
 
       {/* ── Tabs / Filters ── */}
@@ -267,9 +269,10 @@ export default function TurmasPage() {
             companyTypeIcon[cls.companyType] || Building2;
 
           return (
-            <div
+            <Link
               key={cls.id}
-              className="group relative overflow-hidden rounded-xl bg-card border border-border p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-pointer"
+              href={`/instrutor/apresentacao?classId=${cls.id}`}
+              className="group relative overflow-hidden rounded-xl bg-card border border-border p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 cursor-pointer block text-left"
             >
               {/* Top Row */}
               <div className="flex items-start justify-between mb-4">
@@ -349,7 +352,7 @@ export default function TurmasPage() {
 
               {/* Glow */}
               <div className="absolute inset-0 bg-fire-gradient opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-            </div>
+            </Link>
           );
         })}
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback, useTransition } from "react";
+import { useState, useEffect, useCallback, useTransition, Suspense } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Play,
   Pause,
@@ -98,15 +98,30 @@ function useTimer(initialSeconds = 0, isRunning = false) {
   return { seconds, formatted, running, setRunning, toggle: () => setRunning((r) => !r) };
 }
 
-export default function ApresentacaoPage() {
+function ApresentacaoCockpit() {
   const supabase = createClient();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const classIdParam = searchParams.get("classId");
   const [isPending, startTransition] = useTransition();
 
   /* ═══ States ═══ */
   const [classes, setClasses] = useState<ClassFromDB[]>([]);
   const [loadingClasses, setLoadingClasses] = useState(true);
   const [activeClass, setActiveClass] = useState<ClassFromDB | null>(null);
+
+  /* ═══ URL Class Autoselect ═══ */
+  useEffect(() => {
+    if (classIdParam && classes.length > 0 && !activeClass) {
+      const match = classes.find((c) => c.id === classIdParam);
+      if (match) {
+        setActiveClass(match);
+        if (match.interaction_mode) {
+          setInteractionMode(match.interaction_mode);
+        }
+      }
+    }
+  }, [classIdParam, classes, activeClass]);
 
   const [subthemes, setSubthemes] = useState<Subtheme[]>([]);
   const [loadingSubthemes, setLoadingSubthemes] = useState(false);
@@ -208,6 +223,35 @@ export default function ApresentacaoPage() {
       }
     }
   }, [activeClass, fetchSubthemes]);
+
+  /* ═══ Sync Active Subtheme to Supabase ═══ */
+  useEffect(() => {
+    if (activeClass && activeClass.status === "em_andamento" && subthemes.length > 0) {
+      const subthemeId = subthemes[activeIndex]?.id;
+      if (subthemeId) {
+        supabase
+          .from("classes")
+          .update({ active_subtheme_id: subthemeId })
+          .eq("id", activeClass.id)
+          .then(({ error }) => {
+            if (error) console.error("Erro ao sincronizar subtema no Supabase:", error);
+          });
+      }
+    }
+  }, [activeIndex, subthemes, activeClass, supabase]);
+
+  /* ═══ Sync Interaction Mode to Supabase ═══ */
+  useEffect(() => {
+    if (activeClass && activeClass.status === "em_andamento") {
+      supabase
+        .from("classes")
+        .update({ interaction_mode: interactionMode })
+        .eq("id", activeClass.id)
+        .then(({ error }) => {
+          if (error) console.error("Erro ao atualizar modo de interação no Supabase:", error);
+        });
+    }
+  }, [interactionMode, activeClass, supabase]);
 
   /* ═══ Fetch Attendances (Polling 5s) ═══ */
   const fetchAttendances = useCallback(async () => {
@@ -1093,5 +1137,22 @@ export default function ApresentacaoPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ApresentacaoPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-dvh flex items-center justify-center bg-background px-6">
+        <div className="text-center space-y-4 max-w-sm">
+          <div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto" />
+          <p className="text-sm font-medium text-muted-foreground animate-pulse">
+            Carregando Cockpit de Apresentação...
+          </p>
+        </div>
+      </div>
+    }>
+      <ApresentacaoCockpit />
+    </Suspense>
   );
 }

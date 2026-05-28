@@ -16,6 +16,7 @@ import {
   LogOut,
   Menu,
   X,
+  TrendingUp,
 } from "lucide-react";
 import { logout } from "@/app/actions/auth";
 
@@ -45,6 +46,11 @@ const navItems = [
     label: "Comercial",
     href: "/instrutor/comercial",
     icon: ShoppingCart,
+  },
+  {
+    label: "CRM (Vendas)",
+    href: "/instrutor/crm",
+    icon: TrendingUp,
   },
   {
     label: "Configurações",

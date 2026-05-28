@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect, useTransition } from "react";
+import { useState, useMemo, useCallback, useEffect, useTransition, Suspense } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   ShoppingCart,
   Plus,
@@ -29,6 +29,7 @@ import {
   MapPin,
   Lock,
   Unlock,
+  MonitorPlay,
 } from "lucide-react";
 
 /* ═══ Types ═══ */
@@ -99,9 +100,14 @@ const categoryIcons: Record<Category, string> = {
   SIPAT: "🛡️",
 };
 
-export default function ComercialPage() {
+function ComercialContent() {
   const supabase = createClient();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const queryCompanyName = searchParams.get("companyName");
+  const queryLeadId = searchParams.get("leadId");
+
+  const [leadId, setLeadId] = useState<string | null>(queryLeadId);
   const [isPending, startTransition] = useTransition();
 
   /* ═══ RBAC (User Role) State ═══ */
@@ -160,6 +166,22 @@ export default function ComercialPage() {
   }, [supabase]);
 
   const hasReorderingAccess = userRole === "diretor" || userRole === "coordenador";
+
+  useEffect(() => {
+    if (queryCompanyName && companies.length > 0) {
+      const match = companies.find(
+        (c) => c.name.toLowerCase() === queryCompanyName.toLowerCase()
+      );
+      if (match) {
+        setSelectedCompanyId(match.id);
+        setIsNewCompany(false);
+      } else {
+        setIsNewCompany(true);
+        setNewCompanyName(queryCompanyName);
+        setSelectedCompanyId("");
+      }
+    }
+  }, [queryCompanyName, companies]);
 
   /* ═══ Load Subthemes and Companies ═══ */
   const loadInitialData = useCallback(async () => {
@@ -517,6 +539,15 @@ export default function ComercialPage() {
         });
 
         if (classError) throw classError;
+
+        // 4.5. Se originado de um lead do CRM, atualiza o status no CRM para ganho
+        if (leadId) {
+          const { error: leadUpdateError } = await supabase
+            .from("crm_leads")
+            .update({ stage: "ganho" })
+            .eq("id", leadId);
+          if (leadUpdateError) console.error("Erro ao atualizar lead para ganho:", leadUpdateError);
+        }
 
         // 5. Success
         setContractModalOpen(false);
@@ -1160,5 +1191,18 @@ export default function ComercialPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ComercialPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex-1 flex flex-col items-center justify-center space-y-4 py-20 bg-background text-foreground">
+        <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+        <p className="text-sm text-muted-foreground">Carregando Hub Comercial...</p>
+      </div>
+    }>
+      <ComercialContent />
+    </Suspense>
   );
 }

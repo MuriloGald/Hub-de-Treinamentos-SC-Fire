@@ -85,6 +85,8 @@ create table if not exists public.classes (
   location        text,
   notes           text,
   qr_code_token   text unique default encode(gen_random_bytes(16), 'hex'),
+  active_subtheme_id uuid references public.subthemes(id) on delete set null,
+  interaction_mode   boolean not null default false,
   created_at      timestamptz not null default now(),
   updated_at      timestamptz not null default now()
 );
@@ -221,4 +223,54 @@ insert into public.subthemes (name, category, level, hours, price) values
   ('Vistoria no Contexto de Brigada',                   'Combate a Incêndio', 'Bronze', 1.0,  150.00),
   ('Atividade de Brigada de Incêndio',                  'Combate a Incêndio', 'Ouro',   3.0,  300.00),
   ('Direção Segura',                                    'SIPAT',              'Bronze', 1.0,  150.00)
+on conflict do nothing;
+
+-- ══════════════════════════════════════════════════════════════════
+-- SEED DATA — Questões de Prova (exam_questions)
+-- ══════════════════════════════════════════════════════════════════
+insert into public.exam_questions (subtheme_id, question_text, options, explanation) values
+  (
+    (select id from public.subthemes where name = 'Suporte Básico de Vida' limit 1),
+    'Qual a frequência ideal de compressões torácicas na RCP em adultos?',
+    '[
+      {"text": "60 a 80 compressões por minuto", "correct": false},
+      {"text": "80 a 100 compressões por minuto", "correct": false},
+      {"text": "100 a 120 compressões por minuto", "correct": true},
+      {"text": "120 a 140 compressões por minuto", "correct": false}
+    ]'::jsonb,
+    'De acordo com as diretrizes da AHA, a frequência recomendada de compressões torácicas para RCP em adultos é de 100 a 120 por minuto.'
+  ),
+  (
+    (select id from public.subthemes where name = 'Suporte Básico de Vida' limit 1),
+    'Qual a profundidade recomendada para as compressões torácicas em adultos?',
+    '[
+      {"text": "Pelo menos 2 polegadas (5 cm), não excedendo 2,4 polegadas (6 cm)", "correct": true},
+      {"text": "Cerca de 1 a 1,5 polegadas (3 a 4 cm)", "correct": false},
+      {"text": "Pelo menos 3 polegadas (8 cm)", "correct": false},
+      {"text": "Qualquer profundidade desde que seja rápida", "correct": false}
+    ]'::jsonb,
+    'A profundidade recomendada para compressões em adultos é de pelo menos 5 cm (2 polegadas) e no máximo 6 cm (2,4 polegadas).'
+  ),
+  (
+    (select id from public.subthemes where name = 'Uso e Manuseio de Extintores' limit 1),
+    'Qual tipo de extintor é mais indicado para combater fogo de Classe C (equipamentos elétricos energizados)?',
+    '[
+      {"text": "Extintor de Água Pressurizada (AP)", "correct": false},
+      {"text": "Extintor de Gás Carbônico (CO2) ou Pó Químico Seco (PQS)", "correct": true},
+      {"text": "Extintor de Espuma Mecânica", "correct": false},
+      {"text": "Qualquer um dos anteriores", "correct": false}
+    ]'::jsonb,
+    'Extintores de CO2 e Pó Químico Seco não conduzem eletricidade, sendo seguros para equipamentos elétricos energizados (Classe C).'
+  ),
+  (
+    (select id from public.subthemes where name = 'Stop the Bleed' limit 1),
+    'Onde deve ser posicionado o torniquete em caso de hemorragia grave em um membro?',
+    '[
+      {"text": "Diretamente sobre a ferida", "correct": false},
+      {"text": "Cerca de 5 a 8 cm (2 a 3 polegadas) acima da ferida, nunca sobre uma articulação", "correct": true},
+      {"text": "Abaixo da ferida", "correct": false},
+      {"text": "Diretamente sobre o joelho ou cotovelo", "correct": false}
+    ]'::jsonb,
+    'O torniquete deve ser colocado 5 a 8 cm acima do local do sangramento, entre a ferida e o coração, evitando articulações.'
+  )
 on conflict do nothing;

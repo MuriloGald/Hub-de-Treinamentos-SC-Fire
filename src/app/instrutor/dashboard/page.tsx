@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
 import {
   Flame,
   Users,
@@ -52,6 +53,7 @@ const stats = [
 const upcomingClasses = [
   {
     id: 1,
+    dbId: "mock-1",
     company: "Metalúrgica Aço Forte",
     training: "Brigada Intermediária (16h)",
     date: "28 Mai, 08:00",
@@ -60,6 +62,7 @@ const upcomingClasses = [
   },
   {
     id: 2,
+    dbId: "mock-2",
     company: "Escola Municipal Horizonte",
     training: "Lei Lucas — Primeiros Socorros",
     date: "30 Mai, 14:00",
@@ -68,6 +71,7 @@ const upcomingClasses = [
   },
   {
     id: 3,
+    dbId: "mock-3",
     company: "Indústria Química SafeChem",
     training: "Brigada Avançada (40h)",
     date: "02 Jun, 07:30",
@@ -126,6 +130,7 @@ export default async function DashboardPage() {
     if (!nextClassesRes.error && nextClassesRes.data && nextClassesRes.data.length > 0) {
       upcomingClassesData = (nextClassesRes.data as any[]).map((row, i) => ({
         id: i + 1,
+        dbId: row.id,
         company: row.company?.name ?? "Empresa",
         training: row.training?.name ?? "Treinamento",
         date: row.scheduled_at
@@ -159,13 +164,14 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        <button
+        <Link
           id="new-class-btn"
+          href="/instrutor/comercial"
           className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-fire-gradient-strong text-white text-sm font-semibold shadow-md shadow-primary/20 transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
         >
           <Plus className="w-4 h-4" />
           Nova Turma
-        </button>
+        </Link>
       </div>
 
       {/* ── Stats Grid ── */}
@@ -205,17 +211,18 @@ export default async function DashboardPage() {
                 Próximas Turmas
               </h2>
             </div>
-            <button className="text-xs text-primary hover:text-primary-hover transition-colors font-medium flex items-center gap-1">
+            <Link href="/instrutor/turmas" className="text-xs text-primary hover:text-primary-hover transition-colors font-medium flex items-center gap-1">
               Ver todas
               <ChevronRight className="w-3 h-3" />
-            </button>
+            </Link>
           </div>
 
           <div className="divide-y divide-border">
             {upcomingClassesData.map((cls) => (
-              <div
+              <Link
                 key={cls.id}
-                className="group flex items-center gap-4 px-5 py-4 hover:bg-surface/50 transition-colors cursor-pointer"
+                href={`/instrutor/apresentacao?classId=${cls.dbId}`}
+                className="group flex items-center gap-4 px-5 py-4 hover:bg-surface/50 transition-colors cursor-pointer w-full text-left"
               >
                 {/* Play button */}
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
@@ -251,14 +258,14 @@ export default async function DashboardPage() {
                   </span>
                   <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-fire-gradient-strong transition-all duration-500"
+                       className="h-full rounded-full bg-fire-gradient-strong transition-all duration-500"
                       style={{ width: `${cls.progress}%` }}
                     />
                   </div>
                 </div>
 
                 <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -272,10 +279,10 @@ export default async function DashboardPage() {
                 Blocos de Conteúdo
               </h2>
             </div>
-            <button className="text-xs text-primary hover:text-primary-hover transition-colors font-medium flex items-center gap-1">
+            <Link href="/instrutor/subtemas" className="text-xs text-primary hover:text-primary-hover transition-colors font-medium flex items-center gap-1">
               Ver todos
               <ChevronRight className="w-3 h-3" />
-            </button>
+            </Link>
           </div>
 
           <div className="divide-y divide-border">
@@ -312,6 +319,7 @@ export default async function DashboardPage() {
             desc: "Abrir o Hub de Apresentação",
             color: "text-primary",
             border: "hover:border-primary/30",
+            href: "/instrutor/apresentacao",
           },
           {
             icon: Award,
@@ -319,6 +327,7 @@ export default async function DashboardPage() {
             desc: "Montar proposta e ementa",
             color: "text-accent",
             border: "hover:border-accent/30",
+            href: "/instrutor/comercial",
           },
           {
             icon: Users,
@@ -326,10 +335,12 @@ export default async function DashboardPage() {
             desc: "Upload de planilha CSV",
             color: "text-success",
             border: "hover:border-success/30",
+            href: "/instrutor/turmas",
           },
         ].map((action) => (
-          <button
+          <Link
             key={action.title}
+            href={action.href}
             className={`group flex items-center gap-4 p-5 rounded-xl bg-card border border-border ${action.border} transition-all duration-300 hover:shadow-md text-left`}
           >
             <div className="w-12 h-12 rounded-xl bg-surface flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -341,7 +352,7 @@ export default async function DashboardPage() {
               </h3>
               <p className="text-xs text-muted-foreground">{action.desc}</p>
             </div>
-          </button>
+          </Link>
         ))}
       </div>
     </div>
