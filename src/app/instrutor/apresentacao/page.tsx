@@ -52,6 +52,8 @@ interface ClassFromDB {
   started_at: string | null;
   company: Company;
   training: Training;
+  interaction_mode?: boolean;
+  active_subtheme_id?: string | null;
 }
 
 interface Subtheme {
