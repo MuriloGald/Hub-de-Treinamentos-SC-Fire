@@ -23,7 +23,7 @@ export async function login(formData: FormData) {
       "Too many requests": "Muitas tentativas. Aguarde alguns minutos.",
     };
     return {
-      error: messages[error.message] ?? "Erro ao entrar. Tente novamente.",
+      error: messages[error.message] ?? `Erro do Supabase: ${error.message}`,
     };
   }
 
