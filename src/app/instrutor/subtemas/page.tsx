@@ -209,6 +209,79 @@ export default function SubtemasPage() {
   const [editSyllabus, setEditSyllabus] = useState("");
   const [saving, setSaving] = useState(false);
 
+  // Estados para Criar Novo Subtema
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [createName, setCreateName] = useState("");
+  const [createHours, setCreateHours] = useState(1);
+  const [createPrice, setCreatePrice] = useState(150);
+  const [createCategory, setCreateCategory] = useState<Category>("Primeiros Socorros");
+  const [createLevel, setCreateLevel] = useState<Level>("Bronze");
+  const [createDescription, setCreateDescription] = useState("");
+  const [createSyllabus, setCreateSyllabus] = useState("");
+
+  const handleOpenCreate = () => {
+    setCreateName("");
+    setCreateHours(1);
+    setCreatePrice(150);
+    setCreateCategory("Primeiros Socorros");
+    setCreateLevel("Bronze");
+    setCreateDescription("");
+    setCreateSyllabus("");
+    setIsCreateOpen(true);
+  };
+
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+
+    const supabase = createClient();
+    let newSubtheme: Subtema | null = null;
+
+    try {
+      const { data, error } = await supabase
+        .from("subthemes")
+        .insert({
+          name: createName.trim(),
+          category: createCategory,
+          level: createLevel,
+          hours: Number(createHours),
+          price: Number(createPrice),
+          description: createDescription.trim(),
+          syllabus: createSyllabus.trim(),
+          active: true,
+        })
+        .select()
+        .single();
+
+      if (!error && data) {
+        newSubtheme = fromDB(data as DBSubtheme);
+      } else {
+        if (error) console.error("Erro ao criar subtema no Supabase:", error);
+      }
+    } catch (err) {
+      console.error("Erro ao criar subtema:", err);
+    }
+
+    if (!newSubtheme) {
+      newSubtheme = {
+        id: "local-" + Date.now(),
+        name: createName.trim(),
+        category: createCategory,
+        level: createLevel,
+        hours: Number(createHours),
+        price: Number(createPrice),
+        description: createDescription.trim(),
+        syllabus: createSyllabus.trim(),
+        hasCanva: false,
+        hasPDF: false,
+      };
+    }
+
+    setSubtemas((prev) => [newSubtheme!, ...prev]);
+    setIsCreateOpen(false);
+    setSaving(false);
+  };
+
   const handleOpenEdit = (sub: Subtema) => {
     setEditingSubtheme(sub);
     setEditName(sub.name);
@@ -325,7 +398,10 @@ export default function SubtemasPage() {
           </p>
         </div>
 
-        <button className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-fire-gradient-strong text-white text-sm font-semibold shadow-md shadow-primary/20 transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]">
+        <button
+          onClick={handleOpenCreate}
+          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-fire-gradient-strong text-white text-sm font-semibold shadow-md shadow-primary/20 transition-all duration-200 hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
+        >
           <Plus className="w-4 h-4" />
           Novo Subtema
         </button>
@@ -717,6 +793,143 @@ export default function SubtemasPage() {
                   className="flex-1 h-11 rounded-xl bg-fire-gradient-strong text-white text-xs font-bold shadow-md shadow-primary/20 hover:shadow-lg transition-all duration-300 disabled:opacity-75 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   {saving ? "Salvando..." : "Salvar Alterações"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ MODAL: Criar Novo Subtema ═══ */}
+      {isCreateOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="relative w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Plus className="w-5 h-5 text-primary" />
+                <h3 className="text-base font-bold text-foreground">Novo Subtema do Catálogo</h3>
+              </div>
+              <button
+                onClick={() => setIsCreateOpen(false)}
+                className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-surface transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleCreate} className="p-6 space-y-4">
+              {/* Name */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Nome do Subtema</label>
+                <input
+                  type="text"
+                  value={createName}
+                  onChange={(e) => setCreateName(e.target.value)}
+                  placeholder="Ex: Suporte Básico de Vida, Stop the Bleed..."
+                  className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  required
+                />
+              </div>
+
+              {/* Category & Level (Selects) */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Categoria</label>
+                  <select
+                    value={createCategory}
+                    onChange={(e) => setCreateCategory(e.target.value as Category)}
+                    className="w-full h-10 px-2 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                  >
+                    <option value="Primeiros Socorros">Primeiros Socorros</option>
+                    <option value="Combate a Incêndio">Combate a Incêndio</option>
+                    <option value="SIPAT">SIPAT</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Nível</label>
+                  <select
+                    value={createLevel}
+                    onChange={(e) => setCreateLevel(e.target.value as Level)}
+                    className="w-full h-10 px-2 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                  >
+                    <option value="Bronze">Bronze</option>
+                    <option value="Prata">Prata</option>
+                    <option value="Ouro">Ouro</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Hours & Price (Numbers) */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Carga Horária (horas)</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="0.1"
+                    value={createHours}
+                    onChange={(e) => setCreateHours(Number(e.target.value))}
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Preço Padrão (R$)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.00"
+                    value={createPrice}
+                    onChange={(e) => setCreatePrice(Number(e.target.value))}
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Descrição Simples */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Descrição Simples (resumo para o card)</label>
+                <textarea
+                  value={createDescription}
+                  onChange={(e) => setCreateDescription(e.target.value)}
+                  placeholder="Ex: Diretrizes básicas de reanimação cardiopulmonar."
+                  className="w-full h-16 p-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
+                  required
+                />
+              </div>
+
+              {/* Ementa Detalhada */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Ementa Detalhada / Conteúdo Programático</label>
+                <textarea
+                  value={createSyllabus}
+                  onChange={(e) => setCreateSyllabus(e.target.value)}
+                  placeholder="Digite os tópicos detalhados separados por linha..."
+                  className="w-full h-24 p-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none resize-y"
+                  required
+                />
+              </div>
+ 
+              {/* Submit Buttons */}
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <button
+                  type="button"
+                  onClick={() => setIsCreateOpen(false)}
+                  className="flex-1 h-11 rounded-xl bg-surface border border-border text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="flex-1 h-11 rounded-xl bg-fire-gradient-strong text-white text-xs font-bold shadow-md shadow-primary/20 hover:shadow-lg transition-all duration-300 disabled:opacity-75 disabled:pointer-events-none flex items-center justify-center gap-2"
+                >
+                  {saving ? "Criando..." : "Criar Subtema"}
                 </button>
               </div>
             </form>
