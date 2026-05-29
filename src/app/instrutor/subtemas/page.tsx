@@ -48,25 +48,100 @@ function fromDB(row: DBSubtheme): Subtema {
 
 /* ═══ Mock Data (fallback) ═══ */
 const MOCK_SUBTEMAS: Subtema[] = [
-  { id: 1,  name: "Suporte Básico de Vida",           level: "Prata",  hours: 2,   category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 2,  name: "Uso e Manuseio de Extintores",     level: "Ouro",   hours: 1.5, category: "Combate a Incêndio",   hasCanva: true,  hasPDF: true  },
-  { id: 3,  name: "Stop the Bleed",                   level: "Prata",  hours: 1,   category: "Primeiros Socorros",   hasCanva: true,  hasPDF: false },
-  { id: 4,  name: "Fraturas e Imobilizações",         level: "Prata",  hours: 1.5, category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 5,  name: "Transporte e Manuseio de Vítimas", level: "Ouro",   hours: 1,   category: "Primeiros Socorros",   hasCanva: false, hasPDF: true  },
-  { id: 6,  name: "Casos Clínicos",                   level: "Ouro",   hours: 2,   category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 7,  name: "Segurança da Cena",                level: "Bronze", hours: 0.5, category: "Primeiros Socorros",   hasCanva: true,  hasPDF: false },
-  { id: 8,  name: "Psicologia do Atendimento",        level: "Bronze", hours: 0.5, category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 9,  name: "Contexto Histórico do Incêndio",   level: "Bronze", hours: 1,   category: "Combate a Incêndio",   hasCanva: true,  hasPDF: false },
-  { id: 10, name: "Atividade de Brigada de Incêndio",  level: "Ouro",   hours: 3,   category: "Combate a Incêndio",   hasCanva: true,  hasPDF: true  },
-  { id: 11, name: "Treinamento para Evacuação",        level: "Prata",  hours: 1,   category: "Combate a Incêndio",   hasCanva: true,  hasPDF: true  },
-  { id: 12, name: "Incêndio em Veículos Elétricos",    level: "Prata",  hours: 1,   category: "Combate a Incêndio",   hasCanva: true,  hasPDF: false },
-  { id: 13, name: "Direção Segura",                    level: "Bronze", hours: 1,   category: "SIPAT",                hasCanva: false, hasPDF: true  },
-  { id: 14, name: "Ferimentos em Tecido Mole",         level: "Bronze", hours: 1,   category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 15, name: "Queimaduras",                       level: "Prata",  hours: 1,   category: "Primeiros Socorros",   hasCanva: true,  hasPDF: true  },
-  { id: 16, name: "Gestão de Brigada",                 level: "Bronze", hours: 1.5, category: "Combate a Incêndio",   hasCanva: true,  hasPDF: false },
-  { id: 17, name: "Sistemas e Medidas Preventivas",    level: "Bronze", hours: 1.5, category: "Combate a Incêndio",   hasCanva: true,  hasPDF: true  },
-  { id: 18, name: "Sistema Hidráulico (Prática)",      level: "Ouro",   hours: 2,   category: "Combate a Incêndio",   hasCanva: false, hasPDF: true  },
-  { id: 19, name: "Vistoria no Contexto de Brigada",   level: "Bronze", hours: 1,   category: "Combate a Incêndio",   hasCanva: true,  hasPDF: false },
+  // 1. Suporte Básico de Vida (Primeiros Socorros)
+  { id: "sbv-b", name: "Suporte Básico de Vida", level: "Bronze", hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "sbv-p", name: "Suporte Básico de Vida", level: "Prata",  hours: 2.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "sbv-o", name: "Suporte Básico de Vida", level: "Ouro",   hours: 3.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 2. Fraturas e Imobilizações (Primeiros Socorros)
+  { id: "fra-b", name: "Fraturas e Imobilizações", level: "Bronze", hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "fra-p", name: "Fraturas e Imobilizações", level: "Prata",  hours: 1.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "fra-o", name: "Fraturas e Imobilizações", level: "Ouro",   hours: 2.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 3. Stop the Bleed (Primeiros Socorros)
+  { id: "stb-b", name: "Stop the Bleed", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "stb-p", name: "Stop the Bleed", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "stb-o", name: "Stop the Bleed", level: "Ouro",   hours: 2.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 4. Transporte e Manuseio de Vítimas (Primeiros Socorros)
+  { id: "tmv-b", name: "Transporte e Manuseio de Vítimas", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: false, hasPDF: true },
+  { id: "tmv-p", name: "Transporte e Manuseio de Vítimas", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true,  hasPDF: true },
+  { id: "tmv-o", name: "Transporte e Manuseio de Vítimas", level: "Ouro",   hours: 2.0, category: "Primeiros Socorros", hasCanva: true,  hasPDF: true },
+
+  // 5. Casos Clínicos (Primeiros Socorros)
+  { id: "cli-b", name: "Casos Clínicos", level: "Bronze", hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "cli-p", name: "Casos Clínicos", level: "Prata",  hours: 2.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "cli-o", name: "Casos Clínicos", level: "Ouro",   hours: 3.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 6. Segurança da Cena (Primeiros Socorros)
+  { id: "seg-b", name: "Segurança da Cena", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "seg-p", name: "Segurança da Cena", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "seg-o", name: "Segurança da Cena", level: "Ouro",   hours: 1.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 7. Psicologia do Atendimento (Primeiros Socorros)
+  { id: "psi-b", name: "Psicologia do Atendimento", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "psi-p", name: "Psicologia do Atendimento", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "psi-o", name: "Psicologia do Atendimento", level: "Ouro",   hours: 1.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 8. Ferimentos em Tecido Mole (Primeiros Socorros)
+  { id: "ftm-b", name: "Ferimentos em Tecido Mole", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "ftm-p", name: "Ferimentos em Tecido Mole", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "ftm-o", name: "Ferimentos em Tecido Mole", level: "Ouro",   hours: 1.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 9. Queimaduras (Primeiros Socorros)
+  { id: "que-b", name: "Queimaduras", level: "Bronze", hours: 0.5, category: "Primeiros Socorros", hasCanva: true, hasPDF: false },
+  { id: "que-p", name: "Queimaduras", level: "Prata",  hours: 1.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+  { id: "que-o", name: "Queimaduras", level: "Ouro",   hours: 2.0, category: "Primeiros Socorros", hasCanva: true, hasPDF: true  },
+
+  // 10. Contexto Histórico do Incêndio (Combate a Incêndio)
+  { id: "his-b", name: "Contexto Histórico do Incêndio", level: "Bronze", hours: 0.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "his-p", name: "Contexto Histórico do Incêndio", level: "Prata",  hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "his-o", name: "Contexto Histórico do Incêndio", level: "Ouro",   hours: 1.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 11. Uso e Manuseio de Extintores (Combate a Incêndio)
+  { id: "ext-b", name: "Uso e Manuseio de Extintores", level: "Bronze", hours: 0.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "ext-p", name: "Uso e Manuseio de Extintores", level: "Prata",  hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "ext-o", name: "Uso e Manuseio de Extintores", level: "Ouro",   hours: 1.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 12. Treinamento para Evacuação (Combate a Incêndio)
+  { id: "eva-b", name: "Treinamento para Evacuação", level: "Bronze", hours: 0.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "eva-p", name: "Treinamento para Evacuação", level: "Prata",  hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "eva-o", name: "Treinamento para Evacuação", level: "Ouro",   hours: 2.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 13. Incêndio em Veículos Elétricos (Combate a Incêndio)
+  { id: "vel-b", name: "Incêndio em Veículos Elétricos", level: "Bronze", hours: 0.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "vel-p", name: "Incêndio em Veículos Elétricos", level: "Prata",  hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "vel-o", name: "Incêndio em Veículos Elétricos", level: "Ouro",   hours: 2.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 14. Gestão de Brigada (Combate a Incêndio)
+  { id: "ges-b", name: "Gestão de Brigada", level: "Bronze", hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "ges-p", name: "Gestão de Brigada", level: "Prata",  hours: 1.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "ges-o", name: "Gestão de Brigada", level: "Ouro",   hours: 2.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 15. Sistemas e Medidas Preventivas (Combate a Incêndio)
+  { id: "sys-b", name: "Sistemas e Medidas Preventivas", level: "Bronze", hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "sys-p", name: "Sistemas e Medidas Preventivas", level: "Prata",  hours: 1.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "sys-o", name: "Sistemas e Medidas Preventivas", level: "Ouro",   hours: 2.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 16. Sistema Hidráulico (Prática) (Combate a Incêndio)
+  { id: "hid-b", name: "Sistema Hidráulico (Prática)", level: "Bronze", hours: 1.0, category: "Combate a Incêndio", hasCanva: false, hasPDF: true  },
+  { id: "hid-p", name: "Sistema Hidráulico (Prática)", level: "Prata",  hours: 2.0, category: "Combate a Incêndio", hasCanva: true,  hasPDF: true  },
+  { id: "hid-o", name: "Sistema Hidráulico (Prática)", level: "Ouro",   hours: 3.0, category: "Combate a Incêndio", hasCanva: true,  hasPDF: true  },
+
+  // 17. Vistoria no Contexto de Brigada (Combate a Incêndio)
+  { id: "vis-b", name: "Vistoria no Contexto de Brigada", level: "Bronze", hours: 0.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "vis-p", name: "Vistoria no Contexto de Brigada", level: "Prata",  hours: 1.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "vis-o", name: "Vistoria no Contexto de Brigada", level: "Ouro",   hours: 2.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 18. Atividade de Brigada de Incêndio (Combate a Incêndio)
+  { id: "act-b", name: "Atividade de Brigada de Incêndio", level: "Bronze", hours: 1.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: false },
+  { id: "act-p", name: "Atividade de Brigada de Incêndio", level: "Prata",  hours: 3.0, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+  { id: "act-o", name: "Atividade de Brigada de Incêndio", level: "Ouro",   hours: 4.5, category: "Combate a Incêndio", hasCanva: true, hasPDF: true  },
+
+  // 19. Direção Segura (SIPAT)
+  { id: "dir-b", name: "Direção Segura", level: "Bronze", hours: 0.5, category: "SIPAT", hasCanva: false, hasPDF: true },
+  { id: "dir-p", name: "Direção Segura", level: "Prata",  hours: 1.0, category: "SIPAT", hasCanva: true,  hasPDF: true },
+  { id: "dir-o", name: "Direção Segura", level: "Ouro",   hours: 2.0, category: "SIPAT", hasCanva: true,  hasPDF: true }
 ];
 
 /* ═══ Design Tokens ═══ */

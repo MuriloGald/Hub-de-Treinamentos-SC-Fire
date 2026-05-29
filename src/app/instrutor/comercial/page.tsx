@@ -100,6 +100,103 @@ const categoryIcons: Record<Category, string> = {
   SIPAT: "🛡️",
 };
 
+const MOCK_SUBTEMAS_COMERCIAL: Subtheme[] = [
+  // 1. Suporte Básico de Vida (Primeiros Socorros)
+  { id: "sbv-b", name: "Suporte Básico de Vida", category: "Primeiros Socorros", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "sbv-p", name: "Suporte Básico de Vida", category: "Primeiros Socorros", level: "Prata",  hours: 2.0, price: 210.00 },
+  { id: "sbv-o", name: "Suporte Básico de Vida", category: "Primeiros Socorros", level: "Ouro",   hours: 3.0, price: 300.00 },
+
+  // 2. Fraturas e Imobilizações (Primeiros Socorros)
+  { id: "fra-b", name: "Fraturas e Imobilizações", category: "Primeiros Socorros", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "fra-p", name: "Fraturas e Imobilizações", category: "Primeiros Socorros", level: "Prata",  hours: 1.5, price: 210.00 },
+  { id: "fra-o", name: "Fraturas e Imobilizações", category: "Primeiros Socorros", level: "Ouro",   hours: 2.5, price: 300.00 },
+
+  // 3. Stop the Bleed (Primeiros Socorros)
+  { id: "stb-b", name: "Stop the Bleed", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "stb-p", name: "Stop the Bleed", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "stb-o", name: "Stop the Bleed", category: "Primeiros Socorros", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 4. Transporte e Manuseio de Vítimas (Primeiros Socorros)
+  { id: "tmv-b", name: "Transporte e Manuseio de Vítimas", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "tmv-p", name: "Transporte e Manuseio de Vítimas", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "tmv-o", name: "Transporte e Manuseio de Vítimas", category: "Primeiros Socorros", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 5. Casos Clínicos (Primeiros Socorros)
+  { id: "cli-b", name: "Casos Clínicos", category: "Primeiros Socorros", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "cli-p", name: "Casos Clínicos", category: "Primeiros Socorros", level: "Prata",  hours: 2.0, price: 210.00 },
+  { id: "cli-o", name: "Casos Clínicos", category: "Primeiros Socorros", level: "Ouro",   hours: 3.0, price: 300.00 },
+
+  // 6. Segurança da Cena (Primeiros Socorros)
+  { id: "seg-b", name: "Segurança da Cena", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "seg-p", name: "Segurança da Cena", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "seg-o", name: "Segurança da Cena", category: "Primeiros Socorros", level: "Ouro",   hours: 1.5, price: 300.00 },
+
+  // 7. Psicologia do Atendimento (Primeiros Socorros)
+  { id: "psi-b", name: "Psicologia do Atendimento a Emergência", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "psi-p", name: "Psicologia do Atendimento a Emergência", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "psi-o", name: "Psicologia do Atendimento a Emergência", category: "Primeiros Socorros", level: "Ouro",   hours: 1.5, price: 300.00 },
+
+  // 8. Ferimentos em Tecido Mole (Primeiros Socorros)
+  { id: "ftm-b", name: "Ferimentos em Tecido Mole", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "ftm-p", name: "Ferimentos em Tecido Mole", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "ftm-o", name: "Ferimentos em Tecido Mole", category: "Primeiros Socorros", level: "Ouro",   hours: 1.5, price: 300.00 },
+
+  // 9. Queimaduras (Primeiros Socorros)
+  { id: "que-b", name: "Queimaduras", category: "Primeiros Socorros", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "que-p", name: "Queimaduras", category: "Primeiros Socorros", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "que-o", name: "Queimaduras", category: "Primeiros Socorros", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 10. Contexto Histórico do Incêndio (Combate a Incêndio)
+  { id: "his-b", name: "Contexto Histórico do Incêndio", category: "Combate a Incêndio", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "his-p", name: "Contexto Histórico do Incêndio", category: "Combate a Incêndio", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "his-o", name: "Contexto Histórico do Incêndio", category: "Combate a Incêndio", level: "Ouro",   hours: 1.5, price: 300.00 },
+
+  // 11. Uso e Manuseio de Extintores (Combate a Incêndio)
+  { id: "ext-b", name: "Uso e Manuseio de Extintores", category: "Combate a Incêndio", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "ext-p", name: "Uso e Manuseio de Extintores", category: "Combate a Incêndio", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "ext-o", name: "Uso e Manuseio de Extintores", category: "Combate a Incêndio", level: "Ouro",   hours: 1.5, price: 300.00 },
+
+  // 12. Treinamento para Evacuação (Combate a Incêndio)
+  { id: "eva-b", name: "Treinamento para Evacuação", category: "Combate a Incêndio", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "eva-p", name: "Treinamento para Evacuação", category: "Combate a Incêndio", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "eva-o", name: "Treinamento para Evacuação", category: "Combate a Incêndio", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 13. Incêndio em Veículos Elétricos (Combate a Incêndio)
+  { id: "vel-b", name: "Incêndio em Veículos Elétricos", category: "Combate a Incêndio", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "vel-p", name: "Incêndio em Veículos Elétricos", category: "Combate a Incêndio", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "vel-o", name: "Incêndio em Veículos Elétricos", category: "Combate a Incêndio", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 14. Gestão de Brigada (Combate a Incêndio)
+  { id: "ges-b", name: "Gestão de Brigada", category: "Combate a Incêndio", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "ges-p", name: "Gestão de Brigada", category: "Combate a Incêndio", level: "Prata",  hours: 1.5, price: 210.00 },
+  { id: "ges-o", name: "Gestão de Brigada", category: "Combate a Incêndio", level: "Ouro",   hours: 2.5, price: 300.00 },
+
+  // 15. Sistemas e Medidas Preventivas (Combate a Incêndio)
+  { id: "sys-b", name: "Sistemas e Medidas Preventivas Contra Incêndio", category: "Combate a Incêndio", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "sys-p", name: "Sistemas e Medidas Preventivas Contra Incêndio", category: "Combate a Incêndio", level: "Prata",  hours: 1.5, price: 210.00 },
+  { id: "sys-o", name: "Sistemas e Medidas Preventivas Contra Incêndio", category: "Combate a Incêndio", level: "Ouro",   hours: 2.5, price: 300.00 },
+
+  // 16. Sistema Hidráulico (Prática) (Combate a Incêndio)
+  { id: "hid-b", name: "Sistema Hidráulico (Prática)", category: "Combate a Incêndio", level: "Bronze", hours: 1.0, price: 150.00 },
+  { id: "hid-p", name: "Sistema Hidráulico (Prática)", category: "Combate a Incêndio", level: "Prata",  hours: 2.0, price: 210.00 },
+  { id: "hid-o", name: "Sistema Hidráulico (Prática)", category: "Combate a Incêndio", level: "Ouro",   hours: 3.0, price: 300.00 },
+
+  // 17. Vistoria no Contexto de Brigada (Combate a Incêndio)
+  { id: "vis-b", name: "Vistoria no Contexto de Brigada", category: "Combate a Incêndio", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "vis-p", name: "Vistoria no Contexto de Brigada", category: "Combate a Incêndio", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "vis-o", name: "Vistoria no Contexto de Brigada", category: "Combate a Incêndio", level: "Ouro",   hours: 2.0, price: 300.00 },
+
+  // 18. Atividade de Brigada de Incêndio (Combate a Incêndio)
+  { id: "act-b", name: "Atividade de Brigada de Incêndio", category: "Combate a Incêndio", level: "Bronze", hours: 1.5, price: 150.00 },
+  { id: "act-p", name: "Atividade de Brigada de Incêndio", category: "Combate a Incêndio", level: "Prata",  hours: 3.0, price: 210.00 },
+  { id: "act-o", name: "Atividade de Brigada de Incêndio", category: "Combate a Incêndio", level: "Ouro",   hours: 4.5, price: 300.00 },
+
+  // 19. Direção Segura (SIPAT)
+  { id: "dir-b", name: "Direção Segura", category: "SIPAT", level: "Bronze", hours: 0.5, price: 150.00 },
+  { id: "dir-p", name: "Direção Segura", category: "SIPAT", level: "Prata",  hours: 1.0, price: 210.00 },
+  { id: "dir-o", name: "Direção Segura", category: "SIPAT", level: "Ouro",   hours: 2.0, price: 300.00 }
+];
+
 function ComercialContent() {
   const supabase = createClient();
   const router = useRouter();
@@ -127,6 +224,22 @@ function ComercialContent() {
     new Set(["Primeiros Socorros", "Combate a Incêndio", "SIPAT"])
   );
   const [comboDropdownOpen, setComboDropdownOpen] = useState(false);
+
+  const [editingItemId, setEditingItemId] = useState<string | null>(null);
+  const [editingItemHours, setEditingItemHours] = useState<number>(0);
+  const [editingItemName, setEditingItemName] = useState<string>("");
+
+  const handleSaveHours = useCallback(() => {
+    if (!editingItemId) return;
+    setSelectedItems((prev) =>
+      prev.map((si) =>
+        si.subtheme.id === editingItemId
+          ? { ...si, subtheme: { ...si.subtheme, hours: Math.max(0.5, editingItemHours) } }
+          : si
+      )
+    );
+    setEditingItemId(null);
+  }, [editingItemId, editingItemHours]);
 
   /* ── Finalize Contract / Class Generation Modal States ── */
   const [contractModalOpen, setContractModalOpen] = useState(false);
@@ -227,6 +340,18 @@ function ComercialContent() {
       setCompanies((companiesData as Company[]) || []);
     } catch (err) {
       console.error("Erro ao buscar dados comerciais:", err);
+      // Fallback robusto offline
+      const mandatoryNames = [
+        "Suporte Básico de Vida",
+        "Fraturas e Imobilizações",
+        "Contexto Histórico do Incêndio",
+        "Uso e Manuseio de Extintores",
+        "Treinamento para Evacuação",
+      ];
+      setDbSubthemes(MOCK_SUBTEMAS_COMERCIAL.map((s) => ({
+        ...s,
+        mandatory: mandatoryNames.some((n) => s.name.toLowerCase().includes(n.toLowerCase())),
+      })));
     } finally {
       setLoadingData(false);
     }
@@ -854,7 +979,19 @@ function ComercialContent() {
                         <div className="flex-1 min-w-0">
                           <h4 className="text-xs font-semibold text-foreground truncate">{si.subtheme.name}</h4>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-[10px] text-muted-foreground">{formatHours(si.subtheme.hours)}</span>
+                            <button
+                              onClick={() => {
+                                setEditingItemId(si.subtheme.id);
+                                setEditingItemHours(si.subtheme.hours);
+                                setEditingItemName(si.subtheme.name);
+                              }}
+                              className="inline-flex items-center gap-1 text-[10px] text-muted-foreground hover:text-primary hover:bg-primary/10 px-1.5 py-0.5 rounded transition-all border border-border/40 hover:border-primary/20 bg-surface/30 group/btn"
+                              title="Ajustar carga horária deste tema"
+                            >
+                              <Clock className="w-2.5 h-2.5 text-primary" />
+                              {formatHours(si.subtheme.hours)}
+                              <span className="text-[8px] text-primary/70 font-bold ml-0.5">✏️</span>
+                            </button>
                             {selectedCombo === "customizado" && (
                               <span className="text-[10px] text-muted-foreground">{formatCurrency(si.subtheme.price * si.quantity)}</span>
                             )}
@@ -1185,6 +1322,94 @@ function ComercialContent() {
                 className="w-full h-11 rounded-xl bg-surface border border-border text-muted-foreground hover:text-foreground text-xs font-semibold transition-colors"
               >
                 Voltar ao Comercial
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ MODAL: Ajuste Rápido de Duração do Subtema ═══ */}
+      {editingItemId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="relative w-full max-w-sm bg-card border border-border rounded-2xl shadow-2xl p-6 space-y-6 animate-scale-in">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-border pb-3">
+              <div className="flex items-center gap-2">
+                <Clock className="w-5 h-5 text-primary" />
+                <h3 className="text-sm font-bold text-foreground">Ajustar Duração</h3>
+              </div>
+              <button
+                onClick={() => setEditingItemId(null)}
+                className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-surface transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="text-center space-y-4">
+              <div>
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-bold">Matéria Selecionada</span>
+                <h4 className="text-base font-extrabold text-foreground mt-1 leading-snug">{editingItemName}</h4>
+              </div>
+
+              {/* Hours Adjuster Control */}
+              <div className="flex items-center justify-center gap-6 py-4">
+                <button
+                  type="button"
+                  onClick={() => setEditingItemHours((h) => Math.max(0.5, h - 0.5))}
+                  className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center hover:bg-muted text-foreground font-extrabold text-lg transition-all active:scale-90"
+                >
+                  <Minus className="w-5 h-5 text-primary" />
+                </button>
+                <div className="flex flex-col items-center">
+                  <span className="text-3xl font-black text-foreground tracking-tight">
+                    {formatHours(editingItemHours)}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider mt-1">carga horária</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setEditingItemHours((h) => Math.min(24.0, h + 0.5))}
+                  className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center hover:bg-muted text-foreground font-extrabold text-lg transition-all active:scale-90"
+                >
+                  <Plus className="w-5 h-5 text-primary" />
+                </button>
+              </div>
+
+              {/* Slider for quick visual select */}
+              <div className="px-2 space-y-1.5">
+                <input
+                  type="range"
+                  min="0.5"
+                  max="12.0"
+                  step="0.5"
+                  value={editingItemHours}
+                  onChange={(e) => setEditingItemHours(Number(e.target.value))}
+                  className="w-full h-2 rounded-lg bg-surface border border-border appearance-none cursor-pointer accent-primary focus:outline-none"
+                />
+                <div className="flex items-center justify-between text-[9px] text-muted-foreground font-semibold">
+                  <span>Mín: 0.5h</span>
+                  <span>Máx: 12h+</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-3 pt-3 border-t border-border">
+              <button
+                type="button"
+                onClick={() => setEditingItemId(null)}
+                className="flex-1 h-10 rounded-lg bg-surface border border-border text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveHours}
+                className="flex-1 h-10 rounded-lg bg-fire-gradient-strong text-white text-xs font-bold shadow-md shadow-primary/20 hover:shadow-lg transition-all"
+              >
+                Salvar Alteração
               </button>
             </div>
           </div>
