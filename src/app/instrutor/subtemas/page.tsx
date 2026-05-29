@@ -34,6 +34,8 @@ interface Subtema {
   price?: number;
   description?: string;
   syllabus?: string;
+  canva_embed?: string;
+  pdf_url?: string;
 }
 
 /** Converte registro do Supabase para o formato local */
@@ -49,6 +51,8 @@ function fromDB(row: DBSubtheme): Subtema {
     price: Number(row.price || 0),
     description: row.description || "",
     syllabus: row.syllabus || "",
+    canva_embed: row.canva_embed || "",
+    pdf_url: row.pdf_url || "",
   };
 }
 
@@ -207,6 +211,8 @@ export default function SubtemasPage() {
   const [editLevel, setEditLevel] = useState<Level>("Bronze");
   const [editDescription, setEditDescription] = useState("");
   const [editSyllabus, setEditSyllabus] = useState("");
+  const [editCanvaEmbed, setEditCanvaEmbed] = useState("");
+  const [editPdfUrl, setEditPdfUrl] = useState("");
   const [saving, setSaving] = useState(false);
 
   // Estados para Criar Novo Subtema
@@ -218,6 +224,8 @@ export default function SubtemasPage() {
   const [createLevel, setCreateLevel] = useState<Level>("Bronze");
   const [createDescription, setCreateDescription] = useState("");
   const [createSyllabus, setCreateSyllabus] = useState("");
+  const [createCanvaEmbed, setCreateCanvaEmbed] = useState("");
+  const [createPdfUrl, setCreatePdfUrl] = useState("");
 
   const handleOpenCreate = () => {
     setCreateName("");
@@ -227,6 +235,8 @@ export default function SubtemasPage() {
     setCreateLevel("Bronze");
     setCreateDescription("");
     setCreateSyllabus("");
+    setCreateCanvaEmbed("");
+    setCreatePdfUrl("");
     setIsCreateOpen(true);
   };
 
@@ -248,6 +258,8 @@ export default function SubtemasPage() {
           price: Number(createPrice),
           description: createDescription.trim(),
           syllabus: createSyllabus.trim(),
+          canva_embed: createCanvaEmbed.trim() || null,
+          pdf_url: createPdfUrl.trim() || null,
           active: true,
         })
         .select()
@@ -272,8 +284,10 @@ export default function SubtemasPage() {
         price: Number(createPrice),
         description: createDescription.trim(),
         syllabus: createSyllabus.trim(),
-        hasCanva: false,
-        hasPDF: false,
+        hasCanva: !!createCanvaEmbed.trim(),
+        hasPDF: !!createPdfUrl.trim(),
+        canva_embed: createCanvaEmbed.trim(),
+        pdf_url: createPdfUrl.trim(),
       };
     }
 
@@ -291,6 +305,8 @@ export default function SubtemasPage() {
     setEditLevel(sub.level);
     setEditDescription(sub.description || `Diretrizes completas para o treinamento de ${sub.name} no nível ${sub.level}.`);
     setEditSyllabus(sub.syllabus || `1. Introdução conceitual ao tema ${sub.name};\n2. Análise de conformidade técnica e requisitos;\n3. Práticas aplicadas e exercícios práticos dinâmicos.`);
+    setEditCanvaEmbed(sub.canva_embed || "");
+    setEditPdfUrl(sub.pdf_url || "");
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -312,6 +328,8 @@ export default function SubtemasPage() {
           level: editLevel,
           description: editDescription.trim(),
           syllabus: editSyllabus.trim(),
+          canva_embed: editCanvaEmbed.trim() || null,
+          pdf_url: editPdfUrl.trim() || null,
         })
         .eq("id", editingSubtheme.id);
         
@@ -333,6 +351,10 @@ export default function SubtemasPage() {
               level: editLevel,
               description: editDescription.trim(),
               syllabus: editSyllabus.trim(),
+              hasCanva: !!editCanvaEmbed.trim(),
+              hasPDF: !!editPdfUrl.trim(),
+              canva_embed: editCanvaEmbed.trim(),
+              pdf_url: editPdfUrl.trim(),
             }
           : s
        )
@@ -777,6 +799,31 @@ export default function SubtemasPage() {
                   required
                 />
               </div>
+
+              {/* Links de Canva Embed e PDF da Apostila */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Link de Incorporação Canva (Embed)</label>
+                  <input
+                    type="url"
+                    value={editCanvaEmbed}
+                    onChange={(e) => setEditCanvaEmbed(e.target.value)}
+                    placeholder="https://www.canva.com/design/.../watch?embed"
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Link do PDF da Apostila</label>
+                  <input
+                    type="url"
+                    value={editPdfUrl}
+                    onChange={(e) => setEditPdfUrl(e.target.value)}
+                    placeholder="https://.../brochure.pdf"
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
+              </div>
  
               {/* Submit Buttons */}
               <div className="flex items-center gap-3 pt-4 border-t border-border">
@@ -913,6 +960,31 @@ export default function SubtemasPage() {
                   className="w-full h-24 p-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none resize-y"
                   required
                 />
+              </div>
+
+              {/* Links de Canva Embed e PDF da Apostila */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Link de Incorporação Canva (Embed)</label>
+                  <input
+                    type="url"
+                    value={createCanvaEmbed}
+                    onChange={(e) => setCreateCanvaEmbed(e.target.value)}
+                    placeholder="https://www.canva.com/design/.../watch?embed"
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Link do PDF da Apostila</label>
+                  <input
+                    type="url"
+                    value={createPdfUrl}
+                    onChange={(e) => setCreatePdfUrl(e.target.value)}
+                    placeholder="https://.../brochure.pdf"
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
               </div>
  
               {/* Submit Buttons */}
