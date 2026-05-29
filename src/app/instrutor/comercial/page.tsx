@@ -44,6 +44,8 @@ interface Subtheme {
   hours: number;
   price: number;
   mandatory?: boolean;
+  description?: string;
+  syllabus?: string;
 }
 
 interface SelectedSubtheme {
@@ -56,6 +58,7 @@ type ComboKey =
   | "intermediaria-16h"
   | "avancada-40h"
   | "lei-lucas"
+  | "reciclagem"
   | "customizado";
 
 interface ComboOption {
@@ -213,6 +216,7 @@ function ComercialContent() {
 
   /* ═══ Supabase Loaded States ═══ */
   const [dbSubthemes, setDbSubthemes] = useState<Subtheme[]>([]);
+  const [dbCombos, setDbCombos] = useState<ComboOption[]>([]);
   const [companies, setCompanies] = useState<Company[]>([]);
   const [loadingData, setLoadingData] = useState(true);
 
@@ -300,10 +304,10 @@ function ComercialContent() {
   const loadInitialData = useCallback(async () => {
     setLoadingData(true);
     try {
-      // 1. Fetch Subthemes from DB
+      // 1. Fetch Subthemes from DB (including description and syllabus!)
       const { data: subthemesData, error: subError } = await supabase
         .from("subthemes")
-        .select("id, name, category, level, hours, price, active")
+        .select("id, name, category, level, hours, price, active, description, syllabus")
         .eq("active", true);
 
       if (subError) throw subError;
@@ -324,12 +328,41 @@ function ComercialContent() {
           level: row.level as Level,
           hours: Number(row.hours),
           price: Number(row.price),
+          description: row.description || "",
+          syllabus: row.syllabus || "",
           mandatory: mandatoryNames.some((n) => row.name.toLowerCase().includes(n.toLowerCase())),
         };
       });
       setDbSubthemes(mappedSubthemes);
 
-      // 2. Fetch Companies from DB
+      // 2. Fetch Course Combos from DB
+      const { data: combosData, error: comboError } = await supabase
+        .from("course_combos")
+        .select("*")
+        .eq("active", true);
+
+      if (!comboError && combosData && combosData.length > 0) {
+        const tempCombos: ComboOption[] = [];
+        for (const combo of combosData) {
+          const { data: linkData, error: linkError } = await supabase
+            .from("combo_subthemes")
+            .select("subtheme_id")
+            .eq("combo_id", combo.id);
+
+          tempCombos.push({
+            key: combo.key as ComboKey,
+            label: combo.label,
+            price: Number(combo.price),
+            hours: Number(combo.hours),
+            requiredIds: !linkError && linkData ? linkData.map((l: any) => l.subtheme_id) : [],
+          });
+        }
+        setDbCombos(tempCombos);
+      } else {
+        setDbCombos([]);
+      }
+
+      // 3. Fetch Companies from DB
       const { data: companiesData, error: compError } = await supabase
         .from("companies")
         .select("id, name, type, active")
@@ -352,6 +385,7 @@ function ComercialContent() {
         ...s,
         mandatory: mandatoryNames.some((n) => s.name.toLowerCase().includes(n.toLowerCase())),
       })));
+      setDbCombos([]);
     } finally {
       setLoadingData(false);
     }
@@ -369,18 +403,24 @@ function ComercialContent() {
 
   /* ── Base Combo Options ── */
   const comboOptions: ComboOption[] = useMemo(() => {
-    // SBV, Extintores, Evacuação, SBV, Fraturas, stop the bleed, etc.
+    const customCombo: ComboOption = {
+      key: "customizado",
+      label: "Customizado (Sem Combo)",
+      price: 0,
+      hours: 0,
+      requiredIds: [],
+    };
+
+    if (dbCombos.length > 0) {
+      return [customCombo, ...dbCombos];
+    }
+
+    // Fallback offline estático se não vier nada do banco
     const findIdsByNames = (names: string[]) =>
       dbSubthemes.filter((s) => names.some((n) => s.name.toLowerCase().includes(n.toLowerCase()))).map((s) => s.id);
 
     return [
-      {
-        key: "customizado",
-        label: "Customizado (Sem Combo)",
-        price: 0,
-        hours: 0,
-        requiredIds: [],
-      },
+      customCombo,
       {
         key: "basica-8h",
         label: "Brigada Básica 8h",
@@ -429,8 +469,19 @@ function ComercialContent() {
           "Ferimentos em Tecido Mole",
         ]),
       },
+      {
+        key: "reciclagem",
+        label: "Reciclagem (Customizada)",
+        price: 2000,
+        hours: 8,
+        requiredIds: findIdsByNames([
+          "Suporte Básico de Vida",
+          "Uso e Manuseio de Extintores",
+          "Treinamento para Evacuação",
+        ]),
+      },
     ];
-  }, [dbSubthemes, IN28_MANDATORY_IDS]);
+  }, [dbCombos, dbSubthemes, IN28_MANDATORY_IDS]);
 
   /* ── Derived Data ── */
   const activeCombo = useMemo(

@@ -20,6 +20,7 @@ export interface Subtheme {
   canva_embed: string | null;
   pdf_url: string | null;
   description: string | null;
+  syllabus: string | null;
   in28_code: string | null;
   active: boolean;
   created_at: string;
@@ -132,4 +133,22 @@ export interface ClassWithDetails extends Class {
   company: Company;
   training: Training;
   student_count?: number;
+}
+
+export interface CourseCombo {
+  id: string;
+  key: string;
+  label: string;
+  price: number;
+  hours: number;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ComboSubtheme {
+  id: string;
+  combo_id: string;
+  subtheme_id: string;
+  created_at: string;
 }

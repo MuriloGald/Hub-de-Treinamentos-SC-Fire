@@ -32,6 +32,8 @@ interface Subtema {
   hasCanva: boolean;
   hasPDF: boolean;
   price?: number;
+  description?: string;
+  syllabus?: string;
 }
 
 /** Converte registro do Supabase para o formato local */
@@ -45,6 +47,8 @@ function fromDB(row: DBSubtheme): Subtema {
     hasCanva: !!row.canva_embed,
     hasPDF: !!row.pdf_url,
     price: Number(row.price || 0),
+    description: row.description || "",
+    syllabus: row.syllabus || "",
   };
 }
 
@@ -184,6 +188,8 @@ export default function SubtemasPage() {
     MOCK_SUBTEMAS.map((s) => ({
       ...s,
       price: s.price || (s.level === "Bronze" ? 150 : s.level === "Prata" ? 210 : 300),
+      description: s.description || `Diretrizes completas para o treinamento de ${s.name} no nível ${s.level}.`,
+      syllabus: s.syllabus || `1. Introdução conceitual ao tema ${s.name};\n2. Análise de conformidade técnica e requisitos;\n3. Práticas aplicadas e exercícios práticos dinâmicos.`,
     }))
   );
   const [loading, setLoading] = useState(true);
@@ -199,6 +205,8 @@ export default function SubtemasPage() {
   const [editPrice, setEditPrice] = useState(150);
   const [editCategory, setEditCategory] = useState<Category>("Primeiros Socorros");
   const [editLevel, setEditLevel] = useState<Level>("Bronze");
+  const [editDescription, setEditDescription] = useState("");
+  const [editSyllabus, setEditSyllabus] = useState("");
   const [saving, setSaving] = useState(false);
 
   const handleOpenEdit = (sub: Subtema) => {
@@ -208,6 +216,8 @@ export default function SubtemasPage() {
     setEditPrice(sub.price || (sub.level === "Bronze" ? 150 : sub.level === "Prata" ? 210 : 300));
     setEditCategory(sub.category);
     setEditLevel(sub.level);
+    setEditDescription(sub.description || `Diretrizes completas para o treinamento de ${sub.name} no nível ${sub.level}.`);
+    setEditSyllabus(sub.syllabus || `1. Introdução conceitual ao tema ${sub.name};\n2. Análise de conformidade técnica e requisitos;\n3. Práticas aplicadas e exercícios práticos dinâmicos.`);
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -226,7 +236,9 @@ export default function SubtemasPage() {
           hours: Number(editHours),
           price: Number(editPrice),
           category: editCategory,
-          level: editLevel
+          level: editLevel,
+          description: editDescription.trim(),
+          syllabus: editSyllabus.trim(),
         })
         .eq("id", editingSubtheme.id);
         
@@ -245,7 +257,9 @@ export default function SubtemasPage() {
               hours: Number(editHours),
               price: Number(editPrice),
               category: editCategory,
-              level: editLevel
+              level: editLevel,
+              description: editDescription.trim(),
+              syllabus: editSyllabus.trim(),
             }
           : s
        )
@@ -512,9 +526,9 @@ export default function SubtemasPage() {
                   {sub.name}
                 </h3>
 
-                {/* Level Description */}
-                <p className="text-[11px] text-muted-foreground mb-4">
-                  {lvl.label}
+                {/* Description (Simples) */}
+                <p className="text-[11px] text-muted-foreground/80 mb-4 line-clamp-2 h-8 leading-snug">
+                  {sub.description || lvl.label}
                 </p>
 
                 {/* Category Tag */}
@@ -664,6 +678,30 @@ export default function SubtemasPage() {
                 </div>
               </div>
 
+              {/* Descrição Simples */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Descrição Simples (resumo para o card)</label>
+                <textarea
+                  value={editDescription}
+                  onChange={(e) => setEditDescription(e.target.value)}
+                  placeholder="Ex: Diretrizes básicas de reanimação cardiopulmonar."
+                  className="w-full h-16 p-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
+                  required
+                />
+              </div>
+
+              {/* Ementa Detalhada (Descrição Detalhada) */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Ementa Detalhada / Conteúdo Programático</label>
+                <textarea
+                  value={editSyllabus}
+                  onChange={(e) => setEditSyllabus(e.target.value)}
+                  placeholder="Digite os tópicos detalhados que os alunos aprenderão neste subtema (um por linha ou separados por vírgula)..."
+                  className="w-full h-24 p-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none resize-y"
+                  required
+                />
+              </div>
+ 
               {/* Submit Buttons */}
               <div className="flex items-center gap-3 pt-4 border-t border-border">
                 <button

@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Users,
   BookOpen,
+  GraduationCap,
   Presentation,
   ShoppingCart,
   Settings,
@@ -36,6 +37,11 @@ const navItems = [
     label: "Subtemas",
     href: "/instrutor/subtemas",
     icon: BookOpen,
+  },
+  {
+    label: "Cursos",
+    href: "/instrutor/cursos",
+    icon: GraduationCap,
   },
   {
     label: "Apresentação",
