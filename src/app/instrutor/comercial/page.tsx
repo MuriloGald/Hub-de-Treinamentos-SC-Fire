@@ -629,6 +629,252 @@ function ComercialContent() {
     });
   }, []);
 
+  /* ═══ Generate Printable PDF Proposal ═══ */
+  const handleGenerateProposal = useCallback(() => {
+    if (selectedItems.length === 0) {
+      alert("Por favor, selecione pelo menos um subtema para gerar a proposta.");
+      return;
+    }
+
+    const companyName = isNewCompany 
+      ? newCompanyName 
+      : (companies.find(c => c.id === selectedCompanyId)?.name || "Cliente B2B");
+      
+    const proposalNumber = `PROP-${Date.now().toString().slice(-6)}`;
+    
+    // Abre uma nova janela para visualização de impressão premium
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+
+    const itemsHtml = selectedItems.map((si, index) => {
+      const sub = si.subtheme;
+      return `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 12px 8px; font-weight: bold; color: #1e293b; font-size: 13px;">${index + 1}</td>
+          <td style="padding: 12px 8px; color: #1e293b; font-size: 13px;">
+            <div style="font-weight: bold;">${sub.name}</div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">${sub.description || `Módulo padrão de nível ${sub.level}.`}</div>
+          </td>
+          <td style="padding: 12px 8px; text-align: center;">
+            <span style="font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 6px; 
+              ${sub.level === "Bronze" ? "background-color: #fef3c7; color: #d97706;" : 
+                sub.level === "Prata" ? "background-color: #f1f5f9; color: #475569;" : 
+                "background-color: #fef9c3; color: #ca8a04;"}">
+              ${sub.level}
+            </span>
+          </td>
+          <td style="padding: 12px 8px; text-align: center; font-weight: bold; color: #1e293b; font-size: 13px;">${sub.hours}h</td>
+          ${selectedCombo === "customizado" ? `<td style="padding: 12px 8px; text-align: right; font-weight: bold; color: #1e293b; font-size: 13px;">${formatCurrency(sub.price)}</td>` : ""}
+        </tr>
+      `;
+    }).join("");
+
+    const syllabusHtml = selectedItems.map((si) => {
+      const sub = si.subtheme;
+      if (!sub.syllabus) return "";
+      const syllabusLines = sub.syllabus.split("\n").map(line => `<li>${line}</li>`).join("");
+      return `
+        <div style="margin-bottom: 20px; page-break-inside: avoid;">
+          <h4 style="font-size: 13px; color: #0f172a; border-left: 4px solid #ff4d00; padding-left: 8px; margin-bottom: 8px; font-weight: 700; text-transform: uppercase;">
+            ${sub.name} (${sub.level}) — ${sub.hours}h
+          </h4>
+          <ul style="font-size: 12px; color: #334155; padding-left: 20px; margin-top: 4px; line-height: 1.6;">
+            ${syllabusLines}
+          </ul>
+        </div>
+      `;
+    }).join("");
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Proposta Comercial — ${companyName}</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
+            body {
+              font-family: 'Outfit', sans-serif;
+              color: #334155;
+              line-height: 1.5;
+              padding: 40px;
+              max-width: 800px;
+              margin: 0 auto;
+            }
+            .header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 2px solid #ff4d00;
+              padding-bottom: 20px;
+              margin-bottom: 30px;
+            }
+            .logo {
+              font-size: 24px;
+              font-weight: 800;
+              color: #0f172a;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .logo-fire {
+              color: #ff4d00;
+            }
+            .title {
+              font-size: 22px;
+              font-weight: 700;
+              color: #0f172a;
+              margin: 0;
+            }
+            .meta-info {
+              background-color: #f8fafc;
+              border: 1px solid #e2e8f0;
+              border-radius: 12px;
+              padding: 20px;
+              margin-bottom: 30px;
+              font-size: 13px;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-bottom: 40px;
+            }
+            th {
+              background-color: #f1f5f9;
+              color: #475569;
+              font-weight: 600;
+              font-size: 12px;
+              text-transform: uppercase;
+              padding: 12px 8px;
+              text-align: left;
+            }
+            .footer-notes {
+              font-size: 11px;
+              color: #64748b;
+              margin-top: 50px;
+              border-top: 1px solid #e2e8f0;
+              padding-top: 20px;
+              line-height: 1.6;
+            }
+            .signature-area {
+              display: flex;
+              justify-content: space-between;
+              margin-top: 60px;
+              page-break-inside: avoid;
+            }
+            .signature-box {
+              width: 45%;
+              text-align: center;
+              border-top: 1px solid #94a3b8;
+              padding-top: 10px;
+              font-size: 12px;
+              color: #475569;
+            }
+            .no-print-btn {
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              background: linear-gradient(135deg, #ff4d00, #ff8700);
+              color: white;
+              border: none;
+              padding: 12px 24px;
+              font-size: 14px;
+              font-weight: bold;
+              border-radius: 30px;
+              cursor: pointer;
+              box-shadow: 0 4px 15px rgba(255, 77, 0, 0.3);
+              font-family: 'Outfit', sans-serif;
+              z-index: 999;
+            }
+            @media print {
+              .no-print-btn {
+                display: none;
+              }
+              body {
+                padding: 0;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <button class="no-print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+          
+          <div class="header">
+            <div class="logo">
+              <span class="logo-fire">🔥</span> SC FIRE
+            </div>
+            <div>
+              <div style="font-size: 11px; color: #64748b; text-align: right;">Código Proposta</div>
+              <div style="font-size: 16px; font-weight: bold; color: #0f172a; text-align: right;">${proposalNumber}</div>
+            </div>
+          </div>
+
+          <h2 class="title">Proposta de Treinamento Corporativo B2B</h2>
+          <p style="font-size: 13px; color: #64748b; margin-top: 4px;">Gerada em ${new Date().toLocaleDateString("pt-BR")}</p>
+
+          <div class="meta-info">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong>CLIENTE:</strong> ${companyName}<br>
+                <strong>CURSO BASE:</strong> ${activeCombo.label}
+              </div>
+              <div style="text-align: right;">
+                <strong>CARGA HORÁRIA TOTAL:</strong> ${totalHours}h<br>
+                <strong>VALIDADE:</strong> 15 dias
+              </div>
+            </div>
+          </div>
+
+          <h3 style="font-size: 15px; color: #0f172a; margin-bottom: 12px; font-weight: 700;">1. Grade Curricular Recomendada</h3>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 5%">#</th>
+                <th style="width: 60%">Matéria (Subtema)</th>
+                <th style="width: 15%; text-align: center;">Nível</th>
+                <th style="width: 10%; text-align: center;">Duração</th>
+                ${selectedCombo === "customizado" ? `<th style="width: 10%; text-align: right;">Preço</th>` : ""}
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsHtml}
+            </tbody>
+          </table>
+
+          <div style="display: flex; justify-content: flex-end; margin-bottom: 40px; font-size: 15px; font-weight: bold; color: #0f172a; background-color: #f1f5f9; padding: 15px; border-radius: 8px;">
+            <div style="text-align: right;">
+              Carga Horária Total: ${totalHours}h<br>
+              <span style="color: #ff4d00; font-size: 20px;">Valor Total: ${formatCurrency(totalPrice)}</span>
+            </div>
+          </div>
+
+          <div style="page-break-before: always;"></div>
+
+          <h3 style="font-size: 15px; color: #0f172a; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-weight: 700;">2. Ementa Detalhada & Conteúdo Programático</h3>
+          
+          ${syllabusHtml}
+
+          <div class="signature-area">
+            <div class="signature-box">
+              <strong>SC Fire Treinamentos</strong><br>
+              Depto. Comercial
+            </div>
+            <div class="signature-box">
+              <strong>${companyName}</strong><br>
+              Aceite do Cliente
+            </div>
+          </div>
+
+          <div class="footer-notes">
+            <strong>Notas de Conformidade e Responsabilidade:</strong><br>
+            Os treinamentos propostos pela SC Fire são estruturados em estrita conformidade com as normas técnicas de segurança (incluindo a norma IN28 para brigadas de incêndio). Nossos instrutores são profissionais devidamente credenciados. Esta proposta constitui um compromisso técnico-comercial válido pelo período especificado.
+          </div>
+        </body>
+      </html>
+    `);
+    
+    printWindow.document.close();
+  }, [selectedItems, isNewCompany, newCompanyName, companies, selectedCompanyId, activeCombo, totalHours, selectedCombo, totalPrice]);
+
   /* ═══ Generate Class and Training DB Action ═══ */
   const handleFinalizeContract = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -674,7 +920,11 @@ function ComercialContent() {
         }
 
         // 2. Insere treinamento no banco
-        const trainingName = `${activeCombo.label} — ${isNewCompany ? newCompanyName : companies.find((c) => c.id === selectedCompanyId)?.name}`;
+        const companyNameStr = isNewCompany 
+          ? newCompanyName.trim() 
+          : (companies.find((c) => c.id === selectedCompanyId)?.name || "Cliente B2B");
+
+        const trainingName = `${activeCombo.label} — ${companyNameStr}`;
         const { data: trainingData, error: trainingError } = await supabase
           .from("trainings")
           .insert({
@@ -723,6 +973,20 @@ function ComercialContent() {
             .update({ stage: "ganho" })
             .eq("id", leadId);
           if (leadUpdateError) console.error("Erro ao atualizar lead para ganho:", leadUpdateError);
+        } else {
+          // Se não veio de um lead existente, cria um cartão automático no CRM como ganho!
+          const { error: crmInsertError } = await supabase
+            .from("crm_leads")
+            .insert({
+              company_name: companyNameStr,
+              contact_name: "Fechamento Direto",
+              contact_phone: "-",
+              contact_email: "-",
+              expected_value: totalPrice,
+              notes: `Venda concluída diretamente pelo Hub Comercial. Curso: ${activeCombo.label}. Carga Horária: ${totalHours}h.`,
+              stage: "ganho",
+            });
+          if (crmInsertError) console.error("Erro ao registrar venda automática no CRM:", crmInsertError);
         }
 
         // 5. Success
@@ -1148,8 +1412,18 @@ function ComercialContent() {
                   </div>
                 </div>
 
-                {/* Confirm Sale / Generate Class Button */}
-                <div className="px-5 pb-5 pt-1">
+                {/* Export Proposal and Confirm Sale Buttons */}
+                <div className="px-5 pb-5 pt-1 space-y-2">
+                  <button
+                    type="button"
+                    onClick={handleGenerateProposal}
+                    disabled={selectedItems.length === 0}
+                    className="w-full h-11 rounded-xl bg-surface border border-border text-foreground hover:bg-muted text-xs font-semibold flex items-center justify-center gap-2 transition-all disabled:opacity-45 disabled:cursor-not-allowed hover:border-primary/25"
+                  >
+                    <FileText className="w-4 h-4 text-primary" />
+                    Gerar Proposta Comercial (PDF)
+                  </button>
+                  
                   <button
                     onClick={() => setContractModalOpen(true)}
                     disabled={selectedItems.length === 0}
