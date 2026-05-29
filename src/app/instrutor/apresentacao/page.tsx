@@ -76,6 +76,34 @@ interface Attendance {
   };
 }
 
+/* ═══ Helper: Sanitize Canva Presentation Link for Iframe Embedding ═══ */
+function cleanCanvaUrl(url: string | null): string {
+  if (!url) return "";
+  
+  let target = url.trim();
+
+  // 1. Se colou a tag <iframe> inteira, extrai o src
+  if (target.toLowerCase().includes("<iframe")) {
+    const match = target.match(/src=["']([^"']+)["']/i);
+    if (match && match[1]) {
+      target = match[1];
+    }
+  }
+
+  // 2. Se for link do Canva, garante formato de embed (?embed)
+  if (target.includes("canva.com/")) {
+    const baseUrl = target.split("?")[0];
+    if (baseUrl.endsWith("/view") || baseUrl.endsWith("/watch")) {
+      return `${baseUrl}?embed`;
+    } else if (baseUrl.match(/\/design\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/) || baseUrl.match(/\/design\/[a-zA-Z0-9_-]+$/)) {
+      return `${baseUrl}/view?embed`;
+    }
+    return `${baseUrl}?embed`;
+  }
+
+  return target;
+}
+
 /* ═══ Timer Hook ═══ */
 function useTimer(initialSeconds = 0, isRunning = false) {
   const [seconds, setSeconds] = useState(initialSeconds);
@@ -735,7 +763,7 @@ function ApresentacaoCockpit() {
               activeSubtheme.canva_embed ? (
                 <div className="w-full h-full relative z-10 p-2 sm:p-4">
                   <iframe
-                    src={activeSubtheme.canva_embed}
+                    src={cleanCanvaUrl(activeSubtheme.canva_embed)}
                     className="w-full h-full rounded-xl border border-border bg-black shadow-2xl"
                     allowFullScreen
                     allow="fullscreen"

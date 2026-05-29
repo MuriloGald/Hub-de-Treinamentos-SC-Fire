@@ -60,6 +60,34 @@ function formatCurrency(value: number): string {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
+/* ═══ Helper: Sanitize Canva Presentation Link for Iframe Embedding ═══ */
+function cleanCanvaUrl(url: string | null): string {
+  if (!url) return "";
+  
+  let target = url.trim();
+
+  // 1. Se colou a tag <iframe> inteira, extrai o src
+  if (target.toLowerCase().includes("<iframe")) {
+    const match = target.match(/src=["']([^"']+)["']/i);
+    if (match && match[1]) {
+      target = match[1];
+    }
+  }
+
+  // 2. Se for link do Canva, garante formato de embed (?embed)
+  if (target.includes("canva.com/")) {
+    const baseUrl = target.split("?")[0];
+    if (baseUrl.endsWith("/view") || baseUrl.endsWith("/watch")) {
+      return `${baseUrl}?embed`;
+    } else if (baseUrl.match(/\/design\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/) || baseUrl.match(/\/design\/[a-zA-Z0-9_-]+$/)) {
+      return `${baseUrl}/view?embed`;
+    }
+    return `${baseUrl}?embed`;
+  }
+
+  return target;
+}
+
 /* ═══ Mock Data (fallback) ═══ */
 const MOCK_SUBTEMAS: Subtema[] = [
   // 1. Suporte Básico de Vida (Primeiros Socorros)
@@ -258,7 +286,7 @@ export default function SubtemasPage() {
           price: Number(createPrice),
           description: createDescription.trim(),
           syllabus: createSyllabus.trim(),
-          canva_embed: createCanvaEmbed.trim() || null,
+          canva_embed: cleanCanvaUrl(createCanvaEmbed) || null,
           pdf_url: createPdfUrl.trim() || null,
           active: true,
         })
@@ -286,7 +314,7 @@ export default function SubtemasPage() {
         syllabus: createSyllabus.trim(),
         hasCanva: !!createCanvaEmbed.trim(),
         hasPDF: !!createPdfUrl.trim(),
-        canva_embed: createCanvaEmbed.trim(),
+        canva_embed: cleanCanvaUrl(createCanvaEmbed),
         pdf_url: createPdfUrl.trim(),
       };
     }
@@ -328,7 +356,7 @@ export default function SubtemasPage() {
           level: editLevel,
           description: editDescription.trim(),
           syllabus: editSyllabus.trim(),
-          canva_embed: editCanvaEmbed.trim() || null,
+          canva_embed: cleanCanvaUrl(editCanvaEmbed) || null,
           pdf_url: editPdfUrl.trim() || null,
         })
         .eq("id", editingSubtheme.id);
@@ -353,7 +381,7 @@ export default function SubtemasPage() {
               syllabus: editSyllabus.trim(),
               hasCanva: !!editCanvaEmbed.trim(),
               hasPDF: !!editPdfUrl.trim(),
-              canva_embed: editCanvaEmbed.trim(),
+              canva_embed: cleanCanvaUrl(editCanvaEmbed),
               pdf_url: editPdfUrl.trim(),
             }
           : s
