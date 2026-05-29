@@ -31,6 +31,7 @@ interface Subtema {
   category: Category;
   hasCanva: boolean;
   hasPDF: boolean;
+  price?: number;
 }
 
 /** Converte registro do Supabase para o formato local */
@@ -43,7 +44,12 @@ function fromDB(row: DBSubtheme): Subtema {
     category: row.category as Category,
     hasCanva: !!row.canva_embed,
     hasPDF: !!row.pdf_url,
+    price: Number(row.price || 0),
   };
+}
+
+function formatCurrency(value: number): string {
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 /* ═══ Mock Data (fallback) ═══ */
@@ -174,12 +180,80 @@ const levels: Level[] = ["Bronze", "Prata", "Ouro"];
 
 /* ═══ Component ═══ */
 export default function SubtemasPage() {
-  const [subtemas, setSubtemas] = useState<Subtema[]>(MOCK_SUBTEMAS);
+  const [subtemas, setSubtemas] = useState<Subtema[]>(() =>
+    MOCK_SUBTEMAS.map((s) => ({
+      ...s,
+      price: s.price || (s.level === "Bronze" ? 150 : s.level === "Prata" ? 210 : 300),
+    }))
+  );
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState<Category | "">("");
   const [filterLevel, setFilterLevel] = useState<Level | "">("");
   const [showFilters, setShowFilters] = useState(false);
+
+  // Estados de Edição
+  const [editingSubtheme, setEditingSubtheme] = useState<Subtema | null>(null);
+  const [editName, setEditName] = useState("");
+  const [editHours, setEditHours] = useState(1);
+  const [editPrice, setEditPrice] = useState(150);
+  const [editCategory, setEditCategory] = useState<Category>("Primeiros Socorros");
+  const [editLevel, setEditLevel] = useState<Level>("Bronze");
+  const [saving, setSaving] = useState(false);
+
+  const handleOpenEdit = (sub: Subtema) => {
+    setEditingSubtheme(sub);
+    setEditName(sub.name);
+    setEditHours(sub.hours);
+    setEditPrice(sub.price || (sub.level === "Bronze" ? 150 : sub.level === "Prata" ? 210 : 300));
+    setEditCategory(sub.category);
+    setEditLevel(sub.level);
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingSubtheme) return;
+    setSaving(true);
+    
+    const supabase = createClient();
+    
+    // 1. Tenta atualizar no Supabase se for UUID
+    if (typeof editingSubtheme.id === "string" && editingSubtheme.id.length > 10) {
+      const { error } = await supabase
+        .from("subthemes")
+        .update({
+          name: editName.trim(),
+          hours: Number(editHours),
+          price: Number(editPrice),
+          category: editCategory,
+          level: editLevel
+        })
+        .eq("id", editingSubtheme.id);
+        
+      if (error) {
+        console.error("Erro ao salvar subtema no Supabase:", error);
+      }
+    }
+    
+    // 2. Atualiza no estado local
+    setSubtemas((prev) =>
+      prev.map((s) =>
+        s.id === editingSubtheme.id
+          ? {
+              ...s,
+              name: editName.trim(),
+              hours: Number(editHours),
+              price: Number(editPrice),
+              category: editCategory,
+              level: editLevel
+            }
+          : s
+       )
+    );
+    
+    setEditingSubtheme(null);
+    setSaving(false);
+  };
 
   // Busca dados reais do Supabase; se falhar, mantém o mock
   useEffect(() => {
@@ -407,10 +481,11 @@ export default function SubtemasPage() {
             return (
               <div
                 key={sub.id}
-                className="group relative overflow-hidden rounded-xl bg-card border border-border p-5 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 cursor-pointer"
+                onClick={() => handleOpenEdit(sub)}
+                className="group relative overflow-hidden rounded-xl bg-card border border-border p-5 transition-all duration-300 hover:border-primary/35 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 cursor-pointer"
                 style={{ animationDelay: `${i * 0.04}s` }}
               >
-                {/* Top Row: Level Badge + Hours */}
+                {/* Top Row: Level Badge + Hours & Price */}
                 <div className="flex items-start justify-between mb-3">
                   <span
                     className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${lvl.badge}`}
@@ -419,11 +494,16 @@ export default function SubtemasPage() {
                     {sub.level}
                   </span>
 
-                  <div className="flex items-center gap-1 text-muted-foreground">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span className="text-sm font-semibold text-foreground">
-                      {sub.hours}h
-                    </span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1 text-muted-foreground">
+                      <Clock className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-sm font-semibold text-foreground">
+                        {sub.hours}h
+                      </span>
+                    </div>
+                    <div className="text-xs font-bold text-primary">
+                      {formatCurrency(sub.price || 0)}
+                    </div>
                   </div>
                 </div>
 
@@ -491,6 +571,118 @@ export default function SubtemasPage() {
             <X className="w-3.5 h-3.5" />
             Limpar filtros
           </button>
+        </div>
+      )}
+
+      {/* ═══ MODAL: Editar Subtema do Catálogo ═══ */}
+      {editingSubtheme && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="relative w-full max-w-md bg-card border border-border rounded-2xl shadow-2xl overflow-hidden animate-scale-in">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Layers className="w-5 h-5 text-primary animate-pulse" />
+                <h3 className="text-base font-bold text-foreground">Editar Subtema do Catálogo</h3>
+              </div>
+              <button
+                onClick={() => setEditingSubtheme(null)}
+                className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-surface transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSave} className="p-6 space-y-4">
+              {/* Name */}
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-foreground">Nome do Subtema</label>
+                <input
+                  type="text"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  required
+                />
+              </div>
+
+              {/* Category & Level (Selects) */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Categoria</label>
+                  <select
+                    value={editCategory}
+                    onChange={(e) => setEditCategory(e.target.value as Category)}
+                    className="w-full h-10 px-2 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                  >
+                    <option value="Primeiros Socorros">Primeiros Socorros</option>
+                    <option value="Combate a Incêndio">Combate a Incêndio</option>
+                    <option value="SIPAT">SIPAT</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Nível</label>
+                  <select
+                    value={editLevel}
+                    onChange={(e) => setEditLevel(e.target.value as Level)}
+                    className="w-full h-10 px-2 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                  >
+                    <option value="Bronze">Bronze</option>
+                    <option value="Prata">Prata</option>
+                    <option value="Ouro">Ouro</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Hours & Price (Numbers) */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Carga Horária (horas)</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="0.1"
+                    value={editHours}
+                    onChange={(e) => setEditHours(Number(e.target.value))}
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-semibold text-foreground">Preço Padrão (R$)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.00"
+                    value={editPrice}
+                    onChange={(e) => setEditPrice(Number(e.target.value))}
+                    className="w-full h-10 px-3 rounded-lg bg-surface border border-border text-xs text-foreground focus:outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Submit Buttons */}
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <button
+                  type="button"
+                  onClick={() => setEditingSubtheme(null)}
+                  className="flex-1 h-11 rounded-xl bg-surface border border-border text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="flex-1 h-11 rounded-xl bg-fire-gradient-strong text-white text-xs font-bold shadow-md shadow-primary/20 hover:shadow-lg transition-all duration-300 disabled:opacity-75 disabled:pointer-events-none flex items-center justify-center gap-2"
+                >
+                  {saving ? "Salvando..." : "Salvar Alterações"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
