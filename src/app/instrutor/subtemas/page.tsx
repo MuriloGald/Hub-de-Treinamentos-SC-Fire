@@ -419,7 +419,7 @@ export default function SubtemasPage() {
         filterLevel === "" || s.level === filterLevel;
       return matchesSearch && matchesCategory && matchesLevel;
     });
-  }, [search, filterCategory, filterLevel]);
+  }, [subtemas, search, filterCategory, filterLevel]);
 
   const activeFiltersCount =
     (filterCategory ? 1 : 0) + (filterLevel ? 1 : 0);
