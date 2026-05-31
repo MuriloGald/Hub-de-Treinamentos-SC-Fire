@@ -923,7 +923,7 @@ function UnifiedApresentacaoPageContent() {
           <main className="flex-1 flex items-center justify-center relative p-6 overflow-hidden">
             <div
               ref={slideContentRef}
-              className="w-[1200px] h-[680px] bg-[#0c0d12] border border-white/[0.05] rounded-3xl shadow-2xl overflow-hidden relative flex flex-col items-center justify-center p-12 transition-all duration-300 select-none"
+              className="w-[1200px] h-[680px] min-w-[1200px] min-h-[680px] flex-shrink-0 bg-[#0c0d12] border border-white/[0.05] rounded-3xl shadow-2xl overflow-hidden relative flex flex-col items-center justify-center p-12 transition-all duration-300 select-none"
             >
               {/* Orbs inside box */}
               <div className="absolute top-0 left-0 w-64 h-64 bg-red-500/[0.02] rounded-full blur-3xl pointer-events-none" />
@@ -1110,29 +1110,41 @@ function UnifiedApresentacaoPageContent() {
                 <div className="slide-content text-left w-full h-full flex flex-col justify-center">
                   <div className="section-tag success-tag animate-slide-up">
                     <GitCommit className="w-4 h-4" />
-                    <span>Engenharia de Ação</span>
+                    <span>O Fluxo</span>
                   </div>
 
                   <h2 className="slide-title">
-                    O Fluxo Operacional: <span className="text-red-500 font-black">Como Blindamos sua Operação</span>
+                    {activeDeck === "eventos" && <>O Flow do Nosso Trabalho: <span className="gradient-text">Da Análise à Operação</span></>}
+                    {activeDeck === "projetos" && <>O Flow do Nosso Trabalho: <span className="gradient-text red-grad">Da Análise ao Habite-se</span></>}
+                    {activeDeck === "treinamentos" && <>O Método do Nosso Trabalho: <span className="gradient-text red-grad">Da Análise à Homologação</span></>}
+                    {activeDeck === "consultoria" && <>O Flow da Nossa Consultoria: <span className="gradient-text blue-grad">Do Diagnóstico ao Alvará</span></>}
                   </h2>
+                  <p className="slide-desc">
+                    Desenvolvemos um fluxo inteligente que cuida de toda a segurança jurídica e operacional da SC Fire.
+                  </p>
 
                   <div className="workflow-timeline">
+                    <div className="timeline-line"></div>
+                    
                     {[
-                      { step: "Fase 1: Mapeamento", title: activeDeck === "eventos" ? "Briefing Técnico" : activeDeck === "projetos" ? "Vistoria Diagnóstica" : activeDeck === "treinamentos" ? "Análise de Riscos" : "Vistoria Prévia", desc: activeDeck === "eventos" ? "Estudo de lotação, rotas de fuga e vistorias de palcos." : activeDeck === "projetos" ? "Coleta de dados da edificação e layouts físicos locais." : activeDeck === "treinamentos" ? "Avaliação predial sob a IN 28 e dimensionamento." : "Inspeção dos hidrantes, SPDA, alarmes e rotas." },
-                      { step: "Fase 2: Projeto", title: activeDeck === "eventos" ? "Documentação Ágil" : activeDeck === "projetos" ? "Projetos em CAD" : activeDeck === "treinamentos" ? "Conteúdo Programático" : "Roteiro Técnico", desc: activeDeck === "eventos" ? "Montagem técnica rápida de projetos e ARTs junto ao CBMSC." : activeDeck === "projetos" ? "Desenho técnico preventivo completo e dimensionamento de rotas." : activeDeck === "treinamentos" ? "Planejamento didático teórico-prático personalizado." : "Geração de Laudo Técnico detalhado sem rodeios." },
-                      { step: "Fase 3: Protocolo", title: activeDeck === "eventos" ? "Dimensionamento" : activeDeck === "projetos" ? "Protocolo CBMSC" : activeDeck === "treinamentos" ? "Treinamento Realista" : "Trâmite Preventivo", desc: activeDeck === "eventos" ? "Escala precisa e legal de brigada de bombeiros civis." : activeDeck === "projetos" ? "Acompanhamento digital burocrático de análises do órgão." : activeDeck === "treinamentos" ? "Uso de fogo real e RCP massagem prática assistida." : "Varredura de conformidades de gás e extintores." },
-                      { step: "Fase 4: Operação", title: activeDeck === "eventos" ? "Vistoria & Ação" : activeDeck === "projetos" ? "Vistoria & Alvará" : activeDeck === "treinamentos" ? "Homologação" : "Habite-se Concedido", desc: activeDeck === "eventos" ? "Brigada ativa de prontidão e vistoria rígida no local." : activeDeck === "projetos" ? "Acompanhamento de vistorias técnicas até alvará na mão." : activeDeck === "treinamentos" ? "Emissão de certificados na DAT/CBMSC de forma ágil." : "Entrega do atestado do CBMSC renovado sem multas." }
-                    ].map((stepObj, sIdx) => (
-                      <div key={sIdx} className="timeline-step">
-                        <div className="absolute top-4 right-4 text-xs font-extrabold text-red-500/25 group-hover:text-red-500/50 transition-colors">0{sIdx + 1}</div>
-                        <div className="space-y-2">
-                          <span className="text-[9px] font-extrabold text-red-500 uppercase tracking-widest block">{stepObj.step}</span>
-                          <h4 className="text-sm font-bold text-white group-hover:text-red-500 transition-colors">{stepObj.title}</h4>
+                      { icon: ClipboardSignature, step: "Fase 1: Mapeamento", title: activeDeck === "eventos" ? "Briefing Técnico" : activeDeck === "projetos" ? "Vistoria Diagnóstica" : activeDeck === "treinamentos" ? "Análise de Riscos" : "Vistoria Prévia", desc: activeDeck === "eventos" ? "Estudo de lotação, rotas de fuga e vistorias de palcos." : activeDeck === "projetos" ? "Coleta de dados da edificação e layouts físicos locais." : activeDeck === "treinamentos" ? "Avaliação predial sob a IN 28 e dimensionamento." : "Inspeção dos hidrantes, SPDA, alarmes e rotas." },
+                      { icon: FileCheck2, step: "Fase 2: Projeto", title: activeDeck === "eventos" ? "Documentação Ágil" : activeDeck === "projetos" ? "Projetos em CAD" : activeDeck === "treinamentos" ? "Conteúdo Programático" : "Roteiro Técnico", desc: activeDeck === "eventos" ? "Montagem técnica rápida de projetos e ARTs junto ao CBMSC." : activeDeck === "projetos" ? "Desenho técnico preventivo completo e dimensionamento de rotas." : activeDeck === "treinamentos" ? "Planejamento didático teórico-prático personalizado." : "Geração de Laudo Técnico detalhado sem rodeios." },
+                      { icon: Users, step: "Fase 3: Protocolo", title: activeDeck === "eventos" ? "Dimensionamento" : activeDeck === "projetos" ? "Protocolo CBMSC" : activeDeck === "treinamentos" ? "Treinamento Realista" : "Trâmite Preventivo", desc: activeDeck === "eventos" ? "Escala precisa e legal de brigada de bombeiros civis." : activeDeck === "projetos" ? "Acompanhamento digital burocrático de análises do órgão." : activeDeck === "treinamentos" ? "Uso de fogo real e RCP massagem prática assistida." : "Varredura de conformidades de gás e extintores." },
+                      { icon: ShieldCheck, step: "Fase 4: Operação", title: activeDeck === "eventos" ? "Vistoria & Ação" : activeDeck === "projetos" ? "Vistoria & Alvará" : activeDeck === "treinamentos" ? "Homologação" : "Habite-se Concedido", desc: activeDeck === "eventos" ? "Brigada ativa de prontidão e vistoria rígida no local." : activeDeck === "projetos" ? "Acompanhamento de vistorias técnicas até alvará na mão." : activeDeck === "treinamentos" ? "Emissão de certificados na DAT/CBMSC de forma ágil." : "Entrega do atestado do CBMSC renovado sem multas." }
+                    ].map((stepObj, sIdx) => {
+                      const IconComponent = stepObj.icon;
+                      return (
+                        <div key={sIdx} className="timeline-step">
+                          <div className="step-num">0{sIdx + 1}</div>
+                          <div className="step-card">
+                            <IconComponent className="step-icon" />
+                            <span className="text-[9px] font-extrabold text-red-500 uppercase tracking-widest block">{stepObj.step}</span>
+                            <h4>{stepObj.title}</h4>
+                            <p>{stepObj.desc}</p>
+                          </div>
                         </div>
-                        <p >{stepObj.desc}</p>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -1489,22 +1501,23 @@ function UnifiedApresentacaoPageContent() {
                 </div>
               )}
 
-              {/* Navigation overlay buttons */}
-              <button
-                onClick={prevBniSlide}
-                disabled={currentSlideIndex === 0}
-                className={`absolute left-10 p-3.5 rounded-full border border-white/[0.08] bg-[#0c0d12]/70 text-gray-400 hover:text-white transition-all shadow-lg backdrop-blur-md ${currentSlideIndex === 0 ? "opacity-30 pointer-events-none" : "hover:scale-105 active:scale-95"}`}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextBniSlide}
-                disabled={currentSlideIndex === 5}
-                className={`absolute right-10 p-3.5 rounded-full border border-white/[0.08] bg-[#0c0d12]/70 text-gray-400 hover:text-white transition-all shadow-lg backdrop-blur-md ${currentSlideIndex === 5 ? "opacity-30 pointer-events-none" : "hover:scale-105 active:scale-95"}`}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
             </div>
+
+            {/* Navigation overlay buttons (Placed outside the scaled slide box, relative to the main screen viewport) */}
+            <button
+              onClick={prevBniSlide}
+              disabled={currentSlideIndex === 0}
+              className={`absolute left-8 z-30 p-4 rounded-full border border-white/[0.08] bg-[#0c0d12]/80 text-gray-400 hover:text-white hover:border-white/35 transition-all shadow-2xl backdrop-blur-md ${currentSlideIndex === 0 ? "opacity-30 pointer-events-none" : "hover:scale-105 active:scale-95"}`}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={nextBniSlide}
+              disabled={currentSlideIndex === 5}
+              className={`absolute right-8 z-30 p-4 rounded-full border border-white/[0.08] bg-[#0c0d12]/80 text-gray-400 hover:text-white hover:border-white/35 transition-all shadow-2xl backdrop-blur-md ${currentSlideIndex === 5 ? "opacity-30 pointer-events-none" : "hover:scale-105 active:scale-95"}`}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </main>
 
           {/* RIGHT DRAWER: Speaker Notes */}
