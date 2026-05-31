@@ -32,18 +32,12 @@ console.log("Connecting to:", url);
 const supabase = createClient(url, key);
 
 async function run() {
-  console.log("--- Fetching all subthemes ---");
-  const { data: allData, error: allErr } = await supabase
-    .from("subthemes")
-    .select("*");
-    
-  if (allErr) {
-    console.error("Error querying all subthemes:", allErr.message);
+  const { data, error } = await supabase.from("subthemes").select("id, name").limit(5);
+  if (error) {
+    console.error("Error querying subthemes table:", error.message);
   } else {
-    console.log("Total subthemes in DB:", allData.length);
-    allData.forEach((row, idx) => {
-      console.log(`[${idx + 1}] ID: ${row.id} | Name: "${row.name}" | Cat: "${row.category}" | Lvl: "${row.level}" | Active: ${row.active}`);
-    });
+    console.log("Success! Subthemes in DB:", data.length);
+    console.log("Sample:", data);
   }
 }
 

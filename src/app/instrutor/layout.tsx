@@ -54,6 +54,11 @@ const navItems = [
     icon: ShoppingCart,
   },
   {
+    label: "Apresentador BNI",
+    href: "/instrutor/comercial/apresentacao",
+    icon: Presentation,
+  },
+  {
     label: "CRM (Vendas)",
     href: "/instrutor/crm",
     icon: TrendingUp,
