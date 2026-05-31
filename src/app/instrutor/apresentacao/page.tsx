@@ -837,7 +837,7 @@ function UnifiedApresentacaoPageContent() {
      ═══════════════════════════════════════════════════ */
   if (activeDeck) {
     return (
-      <div className="fixed inset-0 z-50 bg-[#090a0e] text-white flex flex-col font-sans overflow-hidden">
+      <div className="fixed inset-0 z-50 bg-[#090a0e] text-white flex flex-col font-sans overflow-hidden bni-presentation-mode">
         {/* Glowing Background */}
         <div className="absolute inset-0 bg-[#090a0e] overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-red-500/[0.03] blur-[150px]" />
@@ -846,7 +846,7 @@ function UnifiedApresentacaoPageContent() {
 
         {/* TOP HEADER */}
         <header className="h-[80px] bg-[#0c0d12]/90 border-b border-white/[0.05] flex items-center justify-between px-6 flex-shrink-0 relative z-30 backdrop-blur-md">
-          <div className="flex items-center gap-3">
+          <div className="pain-header">
             <span className="text-2xl font-black text-red-500 tracking-tighter">SC</span>
             <span className="text-2xl font-black text-white tracking-tighter">FIRE</span>
             <span
@@ -881,7 +881,7 @@ function UnifiedApresentacaoPageContent() {
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-3">
+          <div className="pain-header">
             <button
               onClick={handleExitBniDeck}
               className="flex items-center gap-2 h-10 px-4 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-white/20 transition-all font-semibold text-xs text-gray-300 hover:text-white"
@@ -931,8 +931,8 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 1: Cover Slide */}
               {currentSlideIndex === 0 && (
-                <div className="w-full h-full flex flex-col items-center justify-center text-center space-y-6 relative">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider animate-slide-up">
+                <div className="slide-content cover-slide text-center flex flex-col items-center justify-center w-full h-full">
+                  <div className="fire-badge animate-slide-up">
                     {activeDeck === "eventos" ? (
                       <>
                         <PartyPopper className="w-4 h-4 text-primary" />
@@ -956,7 +956,7 @@ function UnifiedApresentacaoPageContent() {
                     )}
                   </div>
 
-                  <h1 className="text-[44px] leading-tight font-extrabold tracking-tight text-white max-w-4xl font-display">
+                  <h1 className="main-title">
                     {activeDeck === "eventos" ? (
                       <>
                         A Segurança que seu Evento Precisa, <span className="text-red-500">a Tranquilidade que você Merece</span>
@@ -976,7 +976,7 @@ function UnifiedApresentacaoPageContent() {
                     )}
                   </h1>
 
-                  <p className="text-gray-400 max-w-2xl leading-relaxed text-sm">
+                  <p className="subtitle">
                     {activeDeck === "eventos" && "Nascemos em um dos maiores festivals do sul do país. Conheça nosso ecossistema de soluções preventivas baseadas na IN 24."}
                     {activeDeck === "projetos" && "Desatamos a burocracia do Corpo de Bombeiros através de engenharia preventiva e projetos técnicos contra incêndio de alto desempenho."}
                     {activeDeck === "treinamentos" && "Formação e Reciclagem Técnica de Brigadas Corporativas Orgânicas em estrita conformidade legal com a IN 28 do CBMSC."}
@@ -998,13 +998,13 @@ function UnifiedApresentacaoPageContent() {
                   )}
 
                   {/* Cover Grid Pillars */}
-                  <div className="grid grid-cols-3 gap-6 w-full max-w-[950px] mt-8">
-                    <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-center space-y-2">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
+                  <div className="portfolio-umbrella">
+                    <div className="portfolio-card">
+                      <div className="pcard-icon-wrapper">
                         {activeDeck === "eventos" ? <PartyPopper className="w-5 h-5" /> : activeDeck === "projetos" ? <FileCheck2 className="w-5 h-5" /> : activeDeck === "treinamentos" ? <Users className="w-5 h-5" /> : <ClipboardCheck className="w-5 h-5" />}
                       </div>
-                      <h3 className="text-sm font-bold text-white uppercase">{activeDeck === "eventos" ? "EVENTOS (IN 24)" : activeDeck === "projetos" ? "PPCI Predial" : activeDeck === "treinamentos" ? "Brigadas Orgânicas" : "Pré-Vistoria Diagnóstica"}</h3>
-                      <p className="text-[11px] text-gray-400 leading-relaxed">
+                      <h3 >{activeDeck === "eventos" ? "EVENTOS (IN 24)" : activeDeck === "projetos" ? "PPCI Predial" : activeDeck === "treinamentos" ? "Brigadas Orgânicas" : "Pré-Vistoria Diagnóstica"}</h3>
+                      <p >
                         {activeDeck === "eventos" && "Projetos temporários, vistorias estruturais rápidas e Brigadistas sob a IN 24."}
                         {activeDeck === "projetos" && "Elaboração de Projetos Preventivos para condomínios e indústrias."}
                         {activeDeck === "treinamentos" && "Capacitação obrigatória de colaboradores locais (IN 28) para controle de pânico."}
@@ -1012,12 +1012,12 @@ function UnifiedApresentacaoPageContent() {
                       </p>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-center space-y-2">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
+                    <div className="portfolio-card">
+                      <div className="pcard-icon-wrapper">
                         {activeDeck === "eventos" ? <FileText className="w-5 h-5" /> : activeDeck === "projetos" ? <Award className="w-5 h-5" /> : activeDeck === "treinamentos" ? <ShieldCheck className="w-5 h-5" /> : <FileCheck2 className="w-5 h-5" />}
                       </div>
-                      <h3 className="text-sm font-bold text-white uppercase">{activeDeck === "eventos" ? "PROJETOS" : activeDeck === "projetos" ? "Regularização (AVCB)" : activeDeck === "treinamentos" ? "Brigadistas Particulares" : "Laudos & Pareceres"}</h3>
-                      <p className="text-[11px] text-gray-400 leading-relaxed">
+                      <h3 >{activeDeck === "eventos" ? "PROJETOS" : activeDeck === "projetos" ? "Regularização (AVCB)" : activeDeck === "treinamentos" ? "Brigadistas Particulares" : "Laudos & Pareceres"}</h3>
+                      <p >
                         {activeDeck === "eventos" && "Elaboração e aprovação de PPCI e Habite-se de edificações prediais."}
                         {activeDeck === "projetos" && "Protocolo digital rápido para Habite-se predial e alvarás dos bombeiros."}
                         {activeDeck === "treinamentos" && "Formação técnica e reciclagens homologadas para atuação comercial dedicada."}
@@ -1025,12 +1025,12 @@ function UnifiedApresentacaoPageContent() {
                       </p>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-center space-y-2">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
+                    <div className="portfolio-card">
+                      <div className="pcard-icon-wrapper">
                         {activeDeck === "eventos" ? <GraduationCap className="w-5 h-5" /> : activeDeck === "projetos" ? <Sliders className="w-5 h-5" /> : activeDeck === "treinamentos" ? <Activity className="w-5 h-5" /> : <RefreshCw className="w-5 h-5" />}
                       </div>
-                      <h3 className="text-sm font-bold text-white uppercase">{activeDeck === "eventos" ? "TREINAMENTOS" : activeDeck === "projetos" ? "Alto Desempenho" : activeDeck === "treinamentos" ? "Primeiros Socorros" : "Renovação Simplificada"}</h3>
-                      <p className="text-[11px] text-gray-400 leading-relaxed">
+                      <h3 >{activeDeck === "eventos" ? "TREINAMENTOS" : activeDeck === "projetos" ? "Alto Desempenho" : activeDeck === "treinamentos" ? "Primeiros Socorros" : "Renovação Simplificada"}</h3>
+                      <p >
                         {activeDeck === "eventos" && "Capacitação técnica de brigadas orgânicas internas e primeiros socorros."}
                         {activeDeck === "projetos" && "Estudos de fluidodinâmica 3D por supercomputadores (CFD)."}
                         {activeDeck === "treinamentos" && "RCP teórico-prático homologado de acordo com a Lei Lucas."}
@@ -1043,22 +1043,22 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 2: Setor / Dores / Exigências */}
               {currentSlideIndex === 1 && (
-                <div className="w-full h-full flex flex-col justify-center space-y-8 relative">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold max-w-fit uppercase tracking-wider">
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center">
+                  <div className="section-tag warning-tag">
                     <AlertTriangle className="w-4 h-4" />
                     <span>{activeDeck === "eventos" ? "Força do Setor" : activeDeck === "projetos" ? "Segurança Jurídica" : activeDeck === "treinamentos" ? "Conformidade Legal" : "Por que Consultoria?"}</span>
                   </div>
 
-                  <h2 className="text-3xl font-extrabold tracking-tight text-white font-display">
+                  <h2 className="slide-title">
                     {activeDeck === "eventos" && <>O Impacto Gigante do <span className="text-red-500">Turismo de Eventos em Floripa</span></>}
                     {activeDeck === "projetos" && <>Por que Regularizar? <span className="text-amber-500">Riscos e Sanções Inesperadas</span></>}
                     {activeDeck === "treinamentos" && <>A Exigência Técnica da <span className="text-emerald-400 font-display">Instrução Normativa 28</span></>}
                     {activeDeck === "consultoria" && <>A Auditoria Preventiva: <span className="text-sky-400">Aja Antes da Fiscalização</span></>}
                   </h2>
 
-                  <div className="grid grid-cols-2 gap-8 w-full">
-                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-4 text-left">
-                      <div className="flex items-center gap-3">
+                  <div className="grid-2col">
+                    <div className="pain-card stats-card">
+                      <div className="pain-header">
                         <Coins className="w-5 h-5 text-emerald-400" />
                         <h3 className="text-base font-bold text-white">{activeDeck === "eventos" ? "Serviços em Floripa" : activeDeck === "projetos" ? "O Escudo do Alvará" : activeDeck === "treinamentos" ? "Plano de Implantação (PIBI)" : "Conformidade Antecipada"}</h3>
                       </div>
@@ -1068,19 +1068,19 @@ function UnifiedApresentacaoPageContent() {
                         {activeDeck === "treinamentos" && "Sob a IN 28 do Corpo de Bombeiros (CBMSC), a regularidade predial exige a constituição da brigada orgânica corporativa."}
                         {activeDeck === "consultoria" && "Não espere a vistoria oficial surpresa de rotina dos oficiais bombeiros ou seguradoras prediais para consertar pendências."}
                       </p>
-                      <div className="space-y-3 pt-2">
-                        <div className="flex gap-4 items-center bg-white/[0.01] border border-white/[0.03] p-3 rounded-xl">
-                          <span className="text-xl font-extrabold text-emerald-400">{activeDeck === "eventos" ? "76,1%" : activeDeck === "projetos" ? "100% Legal" : activeDeck === "treinamentos" ? "PIBI Exigido" : "Varredura"}</span>
-                          <span className="text-[11px] text-gray-300 leading-relaxed">{activeDeck === "eventos" ? "Do PIB Municipal gerado pelo Setor de Serviços." : activeDeck === "projetos" ? "Total conformidade contra multas de fiscalização predial." : activeDeck === "treinamentos" ? "Obrigatório o protocolo digital no CBMSC para renovar atestado." : "Inspeção cirúrgica prévia em mais de 35 normas preventivas."}</span>
+                      <div className="quick-facts">
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "76,1%" : activeDeck === "projetos" ? "100% Legal" : activeDeck === "treinamentos" ? "PIBI Exigido" : "Varredura"}</span>
+                          <span className="fact-label">{activeDeck === "eventos" ? "Do PIB Municipal gerado pelo Setor de Serviços." : activeDeck === "projetos" ? "Total conformidade contra multas de fiscalização predial." : activeDeck === "treinamentos" ? "Obrigatório o protocolo digital no CBMSC para renovar atestado." : "Inspeção cirúrgica prévia em mais de 35 normas preventivas."}</span>
                         </div>
-                        <div className="flex gap-4 items-center bg-white/[0.01] border border-white/[0.03] p-3 rounded-xl">
-                          <span className="text-xl font-extrabold text-emerald-400">{activeDeck === "eventos" ? "R$ 100 Mi" : activeDeck === "projetos" ? "Seguro Ativo" : activeDeck === "treinamentos" ? "Brigadistas" : "Segurança"}</span>
-                          <span className="text-[11px] text-gray-300 leading-relaxed">{activeDeck === "eventos" ? "Faturamento médio mensal de grandes eventos na cidade." : activeDeck === "projetos" ? "Garante total liquidez securitária em caso de sinistro." : activeDeck === "treinamentos" ? "Dimensione e prepare o número ideal de funcionários." : "Fim do estresse de multas ou lacração surpresa das portas."}</span>
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "R$ 100 Mi" : activeDeck === "projetos" ? "Seguro Ativo" : activeDeck === "treinamentos" ? "Brigadistas" : "Segurança"}</span>
+                          <span className="fact-label">{activeDeck === "eventos" ? "Faturamento médio mensal de grandes eventos na cidade." : activeDeck === "projetos" ? "Garante total liquidez securitária em caso de sinistro." : activeDeck === "treinamentos" ? "Dimensione e prepare o número ideal de funcionários." : "Fim do estresse de multas ou lacração surpresa das portas."}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-center space-y-4 border-l-red-500/40 border-l-4 text-left">
+                    <div className="pain-card">
                       <h4 className="text-sm font-bold text-red-500 flex items-center gap-1.5 uppercase">
                         <ShieldAlert className="w-4 h-4 text-red-500" />
                         As Dores e Custos da Falha Preventiva
@@ -1088,7 +1088,7 @@ function UnifiedApresentacaoPageContent() {
                       <p className="text-xs text-gray-400 leading-relaxed">
                         A ausência de prevenção profissional ativa gera consequências severas que paralisam negócios e eventos na véspera da abertura:
                       </p>
-                      <ul className="space-y-3.5 pt-2 text-left">
+                      <ul className="pain-list">
                         {[
                           "Embargos e lacrações surpresas aplicadas na véspera do seu evento ou funcionamento comercial.",
                           "Processos criminais e responsabilidade civil direta sobre os organizadores, síndicos e gestores em caso de incidentes.",
@@ -1107,30 +1107,30 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 3: Flow do trabalho */}
               {currentSlideIndex === 2 && (
-                <div className="w-full h-full flex flex-col justify-center space-y-8 relative">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold max-w-fit uppercase tracking-wider animate-slide-up">
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center">
+                  <div className="section-tag success-tag animate-slide-up">
                     <GitCommit className="w-4 h-4" />
                     <span>Engenharia de Ação</span>
                   </div>
 
-                  <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                  <h2 className="slide-title">
                     O Fluxo Operacional: <span className="text-red-500 font-black">Como Blindamos sua Operação</span>
                   </h2>
 
-                  <div className="grid grid-cols-4 gap-4 w-full">
+                  <div className="workflow-timeline">
                     {[
                       { step: "Fase 1: Mapeamento", title: activeDeck === "eventos" ? "Briefing Técnico" : activeDeck === "projetos" ? "Vistoria Diagnóstica" : activeDeck === "treinamentos" ? "Análise de Riscos" : "Vistoria Prévia", desc: activeDeck === "eventos" ? "Estudo de lotação, rotas de fuga e vistorias de palcos." : activeDeck === "projetos" ? "Coleta de dados da edificação e layouts físicos locais." : activeDeck === "treinamentos" ? "Avaliação predial sob a IN 28 e dimensionamento." : "Inspeção dos hidrantes, SPDA, alarmes e rotas." },
                       { step: "Fase 2: Projeto", title: activeDeck === "eventos" ? "Documentação Ágil" : activeDeck === "projetos" ? "Projetos em CAD" : activeDeck === "treinamentos" ? "Conteúdo Programático" : "Roteiro Técnico", desc: activeDeck === "eventos" ? "Montagem técnica rápida de projetos e ARTs junto ao CBMSC." : activeDeck === "projetos" ? "Desenho técnico preventivo completo e dimensionamento de rotas." : activeDeck === "treinamentos" ? "Planejamento didático teórico-prático personalizado." : "Geração de Laudo Técnico detalhado sem rodeios." },
                       { step: "Fase 3: Protocolo", title: activeDeck === "eventos" ? "Dimensionamento" : activeDeck === "projetos" ? "Protocolo CBMSC" : activeDeck === "treinamentos" ? "Treinamento Realista" : "Trâmite Preventivo", desc: activeDeck === "eventos" ? "Escala precisa e legal de brigada de bombeiros civis." : activeDeck === "projetos" ? "Acompanhamento digital burocrático de análises do órgão." : activeDeck === "treinamentos" ? "Uso de fogo real e RCP massagem prática assistida." : "Varredura de conformidades de gás e extintores." },
                       { step: "Fase 4: Operação", title: activeDeck === "eventos" ? "Vistoria & Ação" : activeDeck === "projetos" ? "Vistoria & Alvará" : activeDeck === "treinamentos" ? "Homologação" : "Habite-se Concedido", desc: activeDeck === "eventos" ? "Brigada ativa de prontidão e vistoria rígida no local." : activeDeck === "projetos" ? "Acompanhamento de vistorias técnicas até alvará na mão." : activeDeck === "treinamentos" ? "Emissão de certificados na DAT/CBMSC de forma ágil." : "Entrega do atestado do CBMSC renovado sem multas." }
                     ].map((stepObj, sIdx) => (
-                      <div key={sIdx} className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-left flex flex-col justify-between h-[280px] hover:border-red-500/20 hover:bg-white/[0.03] transition-all duration-300 relative group">
+                      <div key={sIdx} className="timeline-step">
                         <div className="absolute top-4 right-4 text-xs font-extrabold text-red-500/25 group-hover:text-red-500/50 transition-colors">0{sIdx + 1}</div>
                         <div className="space-y-2">
                           <span className="text-[9px] font-extrabold text-red-500 uppercase tracking-widest block">{stepObj.step}</span>
                           <h4 className="text-sm font-bold text-white group-hover:text-red-500 transition-colors">{stepObj.title}</h4>
                         </div>
-                        <p className="text-[11px] text-gray-400 leading-relaxed">{stepObj.desc}</p>
+                        <p >{stepObj.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -1139,20 +1139,20 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 4: Case Centrosul (Eventos/Treinamento/Consultoria) ou CFD Simulation Grid (Projetos) */}
               {currentSlideIndex === 3 && (
-                <div className="w-full h-full flex flex-col justify-center space-y-8 relative">
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center">
                   {activeDeck === "projetos" ? (
                     <>
                       {/* CFD 1:1 Special Grid Simulation */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold max-w-fit uppercase tracking-wider animate-pulse">
+                      <div className="section-tag info-tag animate-pulse">
                         <Sliders className="w-4 h-4" />
                         <span>Fluidodinâmica CFD em Ação</span>
                       </div>
 
-                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                      <h2 className="slide-title">
                         Engenharia Computacional 3D: <span className="text-amber-500">Projeto Baseado em Desempenho</span>
                       </h2>
 
-                      <div className="grid grid-cols-2 gap-8 w-full">
+                      <div className="grid-2col">
                         {/* Simulation Screen */}
                         <div className="relative rounded-2xl border border-white/[0.08] bg-[#06070a] h-[300px] overflow-hidden flex items-center justify-center group shadow-2xl">
                           <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none" />
@@ -1198,22 +1198,22 @@ function UnifiedApresentacaoPageContent() {
                   ) : (
                     <>
                       {/* Case Centrosul (Eventos / Treinamentos / Consultoria) */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold max-w-fit uppercase tracking-wider">
+                      <div className="section-tag warning-tag">
                         <AlertOctagon className="w-4 h-4" />
                         <span>Aprender com a História</span>
                       </div>
 
-                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                      <h2 className="slide-title">
                         Estudo de Caso: <span className="text-red-500">O Acidente do Centrosul em 2015</span>
                       </h2>
 
-                      <div className="grid grid-cols-2 gap-8 w-full text-left">
+                      <div className="case-box">
                         {/* Newspaper/Accident visual mockup */}
                         <div className="relative rounded-2xl border border-white/[0.08] bg-[#0c0d12] p-6 overflow-hidden shadow-2xl flex flex-col justify-between h-[300px]">
                           <div className="space-y-4">
                             <span className="text-[10px] text-red-500 font-extrabold uppercase tracking-widest">Notícia Oficial — Florianópolis</span>
                             <h4 className="text-lg font-bold text-white leading-tight font-display">Desabamento de Painel de LED fere 6 pessoas em Centro de Eventos</h4>
-                            <p className="text-[11px] text-gray-400 leading-relaxed">
+                            <p >
                               Um painel de LED pesando **1 tonelada** desabou de uma altura de 5 metros durante a montagem de um congresso nacional no Centrosul, ferindo gravemente seis trabalhadores técnicos locais.
                             </p>
                           </div>
@@ -1251,20 +1251,20 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 5: Ação 60 Segundos (Eventos/Treinamentos/Consultoria) ou SAVE Bateria de Lítio (Projetos) */}
               {currentSlideIndex === 4 && (
-                <div className="w-full h-full flex flex-col justify-center space-y-8 relative">
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center">
                   {activeDeck === "projetos" ? (
                     <>
                       {/* Lithium battery thermal CFD simulation model */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold max-w-fit uppercase tracking-wider animate-pulse">
+                      <div className="section-tag info-tag animate-pulse">
                         <BatteryCharging className="w-4 h-4" />
                         <span>Carros Elétricos — Risco Térmico IN 23</span>
                       </div>
 
-                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                      <h2 className="slide-title">
                         Segurança em Pontos de Recarga: <span className="text-amber-500">Simulação de Bateria Coletiva</span>
                       </h2>
 
-                      <div className="grid grid-cols-2 gap-8 w-full">
+                      <div className="grid-2col">
                         {/* Simulation Screen */}
                         <div className="relative rounded-2xl border border-white/[0.08] bg-[#06070a] h-[300px] overflow-hidden flex items-center justify-center group shadow-2xl">
                           <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none" />
@@ -1315,18 +1315,18 @@ function UnifiedApresentacaoPageContent() {
                   ) : (
                     <>
                       {/* Slide 5: Response Time display (Eventos / Treinamentos / Consultoria) */}
-                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold max-w-fit uppercase tracking-wider">
+                      <div className="section-tag success-tag">
                         <Activity className="w-4 h-4" />
                         <span>Matemática do Tempo de Resposta</span>
                       </div>
 
-                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                      <h2 className="slide-title">
                         Ação Rápida em 60 Segundos: <span className="text-emerald-400">Como Evitamos Tragédias</span>
                       </h2>
 
-                      <div className="grid grid-cols-2 gap-8 w-full">
+                      <div className="grid-2col">
                         {/* Simulation Screen */}
-                        <div className="cfd-response-display w-full max-h-[220px] self-center">
+                        <div className="cfd-response-display">
                           <div className="response-timeline">
                             <div className="response-node node-brigade">
                               <div className="flex justify-between items-center w-full">
@@ -1380,29 +1380,29 @@ function UnifiedApresentacaoPageContent() {
 
               {/* BNI Slide 6: Final Slide / Contacts & References */}
               {currentSlideIndex === 5 && (
-                <div className="w-full h-full flex flex-col items-center justify-center text-center space-y-6 relative animate-fade-in">
+                <div className="slide-content final-slide text-center flex flex-col items-center justify-center w-full h-full animate-fade-in">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Parceria de Confiança</span>
                   </div>
 
-                  <h2 className="text-4xl font-extrabold tracking-tighter text-white font-sans">SC FIRE</h2>
-                  <p className="text-red-500 text-sm font-semibold tracking-wide italic">"A segurança que seu negócio precisa, a tranquilidade que você merece!"</p>
+                  <h2 className="final-headline">SC FIRE</h2>
+                  <p className="final-tagline">"A segurança que seu negócio precisa, a tranquilidade que você merece!"</p>
                   
-                  <div className="grid grid-cols-3 gap-8 w-full max-w-[1000px] items-center pt-4">
+                  <div className="contact-box">
                     {/* Left Column - Dynamic Presenter Information */}
-                    <div className="col-span-1 flex flex-col items-center pr-6 border-r border-white/[0.08]">
+                    <div className="presenter-card-final">
                       {activeDeck !== "consultoria" ? (
                         <div className="flex flex-col items-center space-y-4">
-                          <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/20 bg-white/5 relative presenter-avatar-wrapper shadow-lg">
+                          <div className="presenter-avatar-wrapper shadow-lg">
                             <img
                               src={activeDeck === "projetos" ? "/dione.png" : activeDeck === "treinamentos" ? "/murilo.png" : "/apresentador.png"}
                               alt="Apresentador"
-                              className="w-full h-full object-cover presenter-avatar-cover"
+                              className="presenter-avatar"
                             />
                             <div className="absolute inset-0 bg-fire-gradient opacity-20 pointer-events-none" />
                           </div>
-                          <div className="space-y-1 text-center">
+                          <div className="presenter-title">
                             <h4 className="font-bold text-sm text-white">
                               {activeDeck === "projetos" ? "Dione Borges" : activeDeck === "treinamentos" ? "Sargento BM Murilo Galdino" : "Paulo Roberto Ramos"}
                             </h4>
@@ -1421,7 +1421,7 @@ function UnifiedApresentacaoPageContent() {
                               </div>
                             ))}
                           </div>
-                          <div className="space-y-1 text-center">
+                          <div className="presenter-title">
                             <h4 className="font-bold text-sm text-white">Equipe Multidisciplinar</h4>
                             <p className="text-[10px] text-gray-400">Auditores Especialistas</p>
                             <span className="inline-flex mt-1 text-[8px] font-bold tracking-widest text-amber-400 border border-amber-500/25 bg-amber-500/10 px-2 py-0.5 rounded-full uppercase">Referência Técnica</span>
@@ -1431,16 +1431,16 @@ function UnifiedApresentacaoPageContent() {
                     </div>
 
                     {/* Center Column - Instagram QR code */}
-                    <div className="col-span-1 flex flex-col items-center justify-center space-y-3">
+                    <div className="qr-code-zone">
                       <a
                         href="https://www.instagram.com/sc.fire.engenharia/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 rounded-2xl bg-white/[0.01] border border-white/[0.04] shadow-inner hover:border-emerald-500/30 transition-all duration-300"
+                        className="qr-link"
                       >
-                        <div className="w-24 h-24 bg-white p-1.5 rounded-xl flex items-center justify-center relative shadow-md">
+                        <div className="qr-inner">
                           <img src="/qrcode.png" alt="QR Code Instagram" className="w-full h-full object-contain" />
-                          <div className="absolute inset-0 m-auto w-7 h-7 bg-white rounded-full flex items-center justify-center border border-gray-100 text-red-500 shadow-sm">
+                          <div className="qr-center-icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -1464,9 +1464,9 @@ function UnifiedApresentacaoPageContent() {
                     </div>
 
                     {/* Right Column - Contact Commercial details */}
-                    <div className="col-span-1 flex flex-col items-start gap-4 pl-6 border-l border-white/[0.08] text-left">
-                      <div className="flex gap-3 items-center">
-                        <div className="w-8 h-8 rounded-full bg-white/[0.02] border border-white/[0.04] flex items-center justify-center text-emerald-400">
+                    <div className="contact-details">
+                      <div className="contact-item">
+                        <div className="contact-icon">
                           <MessageSquare className="w-4 h-4" />
                         </div>
                         <div className="text-left">
@@ -1475,8 +1475,8 @@ function UnifiedApresentacaoPageContent() {
                         </div>
                       </div>
 
-                      <div className="flex gap-3 items-center">
-                        <div className="w-8 h-8 rounded-full bg-white/[0.02] border border-white/[0.04] flex items-center justify-center text-sky-400">
+                      <div className="contact-item">
+                        <div className="contact-icon">
                           <Globe className="w-4 h-4" />
                         </div>
                         <div className="text-left">
@@ -1572,7 +1572,7 @@ function UnifiedApresentacaoPageContent() {
      ═══════════════════════════════════════════════════ */
   if (!activeClass) {
     return (
-      <div className="min-h-dvh flex items-center justify-center bg-[#090a0e] relative overflow-hidden px-6 py-12">
+      <div className="min-h-dvh flex items-center justify-center bg-[#090a0e] relative overflow-hidden px-6 py-12 bni-presentation-mode">
         {/* Glow decoration */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-red-500/5 blur-[100px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-emerald-500/5 blur-[100px]" />
@@ -1581,7 +1581,7 @@ function UnifiedApresentacaoPageContent() {
           {/* Header */}
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Flame className="w-4 h-4 text-primary animate-pulse" />
+              <Flame className="w-4 h-4 badge-icon animate-pulse" />
               <span className="text-xs font-semibold text-primary">Central Unificada de Apresentação</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-display">
@@ -1596,7 +1596,7 @@ function UnifiedApresentacaoPageContent() {
             {/* LEFT COLUMN: Classes from Supabase */}
             <div className="glass rounded-3xl p-6 border border-white/[0.05] flex flex-col justify-between space-y-6">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                <div className="pain-header">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                     <GraduationCap className="w-5 h-5" />
                   </div>
@@ -1648,7 +1648,7 @@ function UnifiedApresentacaoPageContent() {
             {/* RIGHT COLUMN: BNI Pitches */}
             <div className="glass rounded-3xl p-6 border border-white/[0.05] flex flex-col justify-between space-y-6">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                <div className="pain-header">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
                     <Award className="w-5 h-5" />
                   </div>
@@ -1668,12 +1668,14 @@ function UnifiedApresentacaoPageContent() {
                     <button
                       key={deck.key}
                       onClick={() => handleSelectBniDeck(deck.key as any)}
-                      className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between items-start h-[120px] text-left group"
+                      className={`select-deck-btn btn-${deck.key === "projetos" ? "projects" : deck.key === "treinamentos" ? "trainings" : deck.key === "consultoria" ? "consulting" : "events"} flex flex-col justify-between items-start h-[120px] text-left group`}
                     >
-                      <div className={`w-8 h-8 rounded-lg ${deck.color} flex items-center justify-center`}>
-                        <deck.icon className="w-4 h-4" />
+                      <div className="option-icon-box">
+                        <deck.icon className="w-5 h-5" />
                       </div>
-                      <span className="text-xs font-bold text-white group-hover:text-primary transition-colors mt-2">{deck.title}</span>
+                      <div className="option-info-box">
+                        <h4 className="text-xs font-bold text-white group-hover:text-primary transition-colors mt-2">{deck.title}</h4>
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -1962,7 +1964,7 @@ function UnifiedApresentacaoPageContent() {
               </button>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="pain-header">
               <button
                 onClick={() => setLibraryOpen(true)}
                 className="h-10 px-4 rounded-lg bg-surface border border-border text-xs font-semibold hover:text-foreground hover:bg-muted flex items-center gap-2"
