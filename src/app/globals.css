@@ -241,3 +241,894 @@ body {
 .focus-ring:focus-visible {
   box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--ring));
 }
+
+
+/* ═══════════════════════════════════════════════════
+   ESTILOS ADICIONAIS DO PROJETO BNI (SIMULAÇÕES CFD / BATERIAS / ANIMACÕES)
+   ═══════════════════════════════════════════════════ */
+
+/* ==========================================================================
+   9. SC FIRE 1:1 SPECIAL VISUAL ARTEFACTS (CFD & LITHIUM THERMAL SIMULATIONS)
+   ========================================================================== */
+
+/* CFD CSS grid 3D simulation display in Slide P4 */
+.cfd-css-display {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.cfd-grid-3d {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, #07080b 0%, rgba(21, 23, 30, 0.8) 100%);
+  perspective: 250px;
+}
+
+.cfd-grid-line {
+  position: absolute;
+  background: rgba(0, 242, 254, 0.06);
+}
+
+.cfd-grid-line.h-line {
+  width: 100%;
+  height: 1px;
+  left: 0;
+}
+
+.cfd-grid-line.h-1 { top: 25%; }
+.cfd-grid-line.h-2 { top: 50%; }
+.cfd-grid-line.h-3 { top: 75%; }
+
+.cfd-grid-line.v-line {
+  width: 1px;
+  height: 100%;
+  top: 0;
+}
+
+.cfd-grid-line.v-1 { left: 25%; }
+.cfd-grid-line.v-2 { left: 50%; }
+.cfd-grid-line.v-3 { left: 75%; }
+
+.cfd-laser-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.8), transparent);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.8);
+  left: 0;
+  animation: laser-scan 4s infinite linear;
+}
+
+.cfd-smoke-cloud {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.22) 0%, rgba(230, 57, 70, 0.08) 50%, transparent 70%);
+  filter: blur(12px);
+  animation: smoke-swell 4s infinite ease-in-out alternate;
+}
+
+.cfd-caption {
+  background: rgba(11, 12, 16, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  color: #00f2fe;
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(0, 242, 254, 0.3);
+}
+
+/* CFD SAVE Lithium Battery thermal simulation display in Slide P5 */
+.cfd-battery-display {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
+}
+
+.cfd-battery-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+  background: rgba(11, 12, 16, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  width: 220px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.cfd-battery-box .bat-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--primary);
+  filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.6));
+  animation: pulse-bat 2s infinite ease-in-out;
+}
+
+@keyframes pulse-bat {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px var(--primary)); }
+}
+
+.cfd-temp-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cfd-temp-fill {
+  height: 100%;
+  width: 78%;
+  background: linear-gradient(90deg, #f2c94c, var(--primary));
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--primary);
+  animation: temp-load 3s infinite alternate ease-in-out;
+}
+
+@keyframes temp-load {
+  0% { width: 65%; }
+  100% { width: 85%; }
+}
+
+.temp-glow {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(230, 57, 70, 0.4);
+}
+
+.cfd-particles-smoke {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.p-smoke {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, rgba(150, 150, 150, 0.04) 50%, transparent 70%);
+  filter: blur(15px);
+  animation: float-smoke 7s infinite linear;
+}
+
+.p-smoke.p-1 {
+  width: 100px;
+  height: 100px;
+  left: 15%;
+  bottom: -60px;
+  animation-delay: 0s;
+  animation-duration: 8s;
+}
+
+.p-smoke.p-2 {
+  width: 120px;
+  height: 120px;
+  left: 45%;
+  bottom: -70px;
+  animation-delay: 2s;
+  animation-duration: 9s;
+}
+
+.p-smoke.p-3 {
+  width: 90px;
+  height: 90px;
+  left: 70%;
+  bottom: -50px;
+  animation-delay: 4.5s;
+  animation-duration: 7s;
+}
+
+/* ==========================================================================
+   10. SIMULATION KEYFRAMES
+   ========================================================================== */
+@keyframes laser-scan {
+  0% { top: 0%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes smoke-swell {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+@keyframes float-smoke {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-320px) scale(1.6) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Welcomes Selector Responsiveness under short heights or narrow screens */
+@media (max-height: 760px), (max-width: 800px) {
+  .selector-container {
+    padding: 24px 30px;
+    gap: 12px;
+  }
+  .selector-logo {
+    font-size: 32px;
+    margin-bottom: 2px;
+  }
+  .selector-container h2 {
+    font-size: 20px;
+  }
+  .selector-container p {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .selector-options {
+    gap: 16px;
+    margin-top: 5px;
+  }
+  .select-deck-btn {
+    padding: 16px 20px;
+    gap: 15px;
+  }
+  .option-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+  }
+  .option-icon-box i {
+    width: 20px;
+    height: 20px;
+  }
+  .option-info-box h3 {
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  .option-info-box p {
+    font-size: 11.5px;
+  }
+}
+
+/* Triple presenters side-by-side layout in Slide 7 for Consultoria */
+.triple-presenters-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding-right: 40px;
+}
+
+.triple-presenters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.presenter-card-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.small-avatar {
+  width: 76px !important;
+  height: 76px !important;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.2) !important;
+}
+
+.presenter-card-small h4 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: var(--text-main);
+}
+
+.presenter-card-small p {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.consulting-theme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(242, 201, 76, 0.08);
+  border: 1px solid rgba(242, 201, 76, 0.25);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #f2c94c;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
+.consulting-theme-badge i {
+  width: 13px;
+  height: 13px;
+  color: #f2c94c;
+}
+
+/* ==========================================================================
+   11. PREMIUM MOBILE RESPONSIVE MEDIA QUERY (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Global viewport setups */
+  html, body {
+    overflow-y: auto; /* Enable natural vertical scrolling if screen is too small */
+  }
+
+  /* Compact header adjustments */
+  .top-header {
+    height: 60px;
+    padding: 0 15px;
+  }
+  .brand-zone {
+    font-size: 18px;
+  }
+  .tag-events {
+    display: none;
+  }
+  .timer-container {
+    width: auto;
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+  .timer-progress-track {
+    display: none;
+  }
+  .timer-metrics {
+    gap: 6px;
+  }
+  .timer-display {
+    font-size: 14px;
+  }
+  .pace-status {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+  .timer-icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* Compact Control buttons (Icon-Only!) */
+  .controls-zone {
+    gap: 6px;
+  }
+  .control-btn {
+    padding: 6px;
+    border-radius: 6px;
+  }
+  .control-btn span {
+    display: none; /* Hide button text, keep only glowing icons */
+  }
+  #btn-test, #btn-fullscreen {
+    display: none; /* Hide non-essential buttons on mobile viewports */
+  }
+
+  /* Elegant Nav Arrows for Mobile */
+  .nav-arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(11, 12, 16, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .nav-arrow i {
+    width: 18px;
+    height: 18px;
+  }
+  .nav-prev {
+    left: 8px;
+  }
+  .nav-next {
+    right: 8px;
+  }
+
+  /* Notes drawer: full screen on mobile */
+  .presenter-notes-panel {
+    width: 100%;
+    right: -100%;
+  }
+  .presenter-notes-panel.open {
+    right: 0;
+  }
+
+  /* Viewport and slide scroll mechanics */
+  .presentation-viewport {
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+  }
+  .slide {
+    display: block; /* Use block layout to support natural scrolling */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 15px 15px 80px 15px; /* Extra bottom breathing room */
+  }
+  .slide-content {
+    margin: 0;
+    transform-origin: top left !important;
+  }
+
+  /* Structure and component stacking */
+  .portfolio-umbrella {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .portfolio-card {
+    padding: 15px !important;
+  }
+  .workflow-timeline {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .step-card {
+    min-height: auto !important;
+    padding: 15px !important;
+  }
+  .grid-2col, .grid-3col {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+
+  /* Cases, text, and simulated elements */
+  .case-box {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 15px !important;
+  }
+  .case-graphics-display {
+    height: auto !important;
+  }
+  .cfd-css-display, .cfd-battery-display {
+    min-height: 180px !important;
+  }
+
+  /* Slide 7 Contact Box Stacking */
+  .contact-box {
+    flex-direction: column !important;
+    gap: 30px !important;
+    padding: 20px !important;
+  }
+  .presenter-card-final {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-right: 0 !important;
+    padding-bottom: 20px !important;
+    width: 100% !important;
+  }
+  .triple-presenters-card {
+    border-right: none !important;
+    padding-right: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 20px !important;
+    width: 100% !important;
+  }
+  .triple-presenters-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  .contact-details {
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .contact-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 8px !important;
+  }
+
+  /* Welcomes Selector Overlay Stack */
+  .selector-container {
+    padding: 20px 15px !important;
+    width: 95% !important;
+    max-height: 98vh !important;
+  }
+  .selector-options {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .select-deck-btn {
+    padding: 14px !important;
+    gap: 12px !important;
+  }
+  .option-icon-box {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 8px !important;
+  }
+  .option-icon-box i {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .option-info-box h3 {
+    font-size: 14px !important;
+  }
+  .option-info-box p {
+    font-size: 11px !important;
+  }
+}
+
+/* ==========================================================================
+   ZOOM IN ON MURILO'S FACE (Cropped via CSS to match his custom crop exactly)
+   ========================================================================== */
+img[src*="murilo"] {
+  object-fit: cover !important;
+  object-position: 78% 52% !important;
+  transform: scale(2.2) !important;
+  transform-origin: 78% 52% !important;
+}
+
+/* ==========================================================================
+   SLIDE T1 PRESENTER BADGE VISUALS
+   ========================================================================== */
+.presenter-badge-cover {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  margin: 15px auto 35px auto;
+  max-width: fit-content;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.presenter-badge-avatar {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.presenter-badge-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.presenter-badge-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(74, 222, 128, 0.4);
+  pointer-events: none;
+  animation: pulse-green-glow 2s infinite alternate;
+}
+
+.presenter-badge-info {
+  text-align: left;
+}
+
+.presenter-badge-info h4 {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 2px 0;
+}
+
+.presenter-badge-info p {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@keyframes pulse-green-glow {
+  0% { box-shadow: inset 0 0 6px rgba(74, 222, 128, 0.3), 0 0 2px rgba(74, 222, 128, 0.2); }
+  100% { box-shadow: inset 0 0 14px rgba(74, 222, 128, 0.6), 0 0 8px rgba(74, 222, 128, 0.4); }
+}
+
+/* ==========================================================================
+   SLIDE T4 CFD SMOKE CHAMBER STYLES
+   ========================================================================== */
+.cfd-smoke-chamber {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%;
+  min-height: 220px;
+  border-radius: 16px;
+  border: 1px solid rgba(230, 57, 70, 0.15);
+  box-shadow: 0 0 25px rgba(230, 57, 70, 0.05);
+}
+
+.emergency-sign-glow {
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #14532d;
+  border: 3px solid #22c55e;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  color: #22c55e;
+  letter-spacing: 1.5px;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+  animation: pulse-exit-green 2s infinite alternate;
+}
+
+.emergency-sign-glow i {
+  width: 20px;
+  height: 20px;
+  color: #22c55e;
+  filter: drop-shadow(0 0 3px #22c55e);
+}
+
+.emergency-flash-light {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #ffffff, 0 0 30px #ffffff;
+  z-index: 10;
+  animation: strobe-flash 0.8s infinite;
+}
+
+.cfd-particles-smoke {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.p-smoke {
+  position: absolute;
+  bottom: -40px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.0) 70%);
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.p-1 {
+  width: 180px;
+  height: 180px;
+  left: 10%;
+  animation: rise-smoke-1 5s infinite ease-out;
+}
+
+.p-2 {
+  width: 220px;
+  height: 220px;
+  left: 45%;
+  animation: rise-smoke-2 6s infinite ease-out;
+  animation-delay: 1.5s;
+}
+
+.p-3 {
+  width: 160px;
+  height: 160px;
+  right: 15%;
+  animation: rise-smoke-3 4.5s infinite ease-out;
+  animation-delay: 3s;
+}
+
+@keyframes pulse-exit-green {
+  0% {
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.7);
+    border-color: #22c55e;
+  }
+}
+
+@keyframes strobe-flash {
+  0%, 90%, 100% { opacity: 0; }
+  92%, 96% { opacity: 1; }
+}
+
+@keyframes rise-smoke-1 {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  15% { opacity: 0.8; }
+  100% { transform: translateY(-240px) scale(1.6); opacity: 0; }
+}
+
+@keyframes rise-smoke-2 {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.6; }
+  100% { transform: translateY(-260px) scale(1.8); opacity: 0; }
+}
+
+@keyframes rise-smoke-3 {
+  0% { transform: translateY(0) scale(0.7); opacity: 0; }
+  10% { opacity: 0.7; }
+  100% { transform: translateY(-220px) scale(1.4); opacity: 0; }
+}
+
+/* ==========================================================================
+   SLIDE T5 RESPONSE TIME COMPARISON
+   ========================================================================== */
+.cfd-response-display {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.cfd-response-display:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--bg-panel-hover);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.response-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.response-node {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.node-badge-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  max-width: fit-content;
+}
+
+.node-badge-time i {
+  width: 14px;
+  height: 14px;
+}
+
+.node-brigade .node-badge-time {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.1);
+}
+
+.node-bombeiros .node-badge-time {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.1);
+}
+
+.node-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.node-bar-container {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.node-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 1s ease-out;
+}
+
+.bar-green {
+  background: linear-gradient(90deg, #22c55e 0%, #4ade80 100%);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  animation: animate-bar-green 2s ease-out infinite alternate;
+}
+
+.bar-red {
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  animation: animate-bar-red 2s ease-out infinite alternate;
+}
+
+.node-status {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.text-green {
+  color: #22c55e;
+  text-shadow: 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.text-red {
+  color: #ef4444;
+  text-shadow: 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+@keyframes animate-bar-green {
+  0% { box-shadow: 0 0 6px rgba(34, 197, 94, 0.4); }
+  100% { box-shadow: 0 0 14px rgba(34, 197, 94, 0.8); }
+}
+
+@keyframes animate-bar-red {
+  0% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); }
+  100% { box-shadow: 0 0 14px rgba(239, 68, 68, 0.8); }
+}
