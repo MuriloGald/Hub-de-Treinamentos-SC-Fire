@@ -172,215 +172,215 @@ function useTimer(initialSeconds = 0, isRunning = false) {
 const SPEAKER_NOTES: Record<string, Record<number, { title: string; speech: string; bullets: string[] }>> = {
   eventos: {
     1: {
-      title: "Slide 1: Abertura, Origem & Portfólio (Tempo: 1:00)",
-      speech: "Bom dia, membros do BNI! Meu nome é Paulo Roberto Ramos e represento a SC Fire. Nossa história começou com muita energia: nascemos em 2012, no festival Planeta Atlântida e logo na sequência atuamos na Copa do Mundo de 2014 em Porto Alegre...",
-      bullets: [
-        "Apresente-se com voz firme e postura confiante.",
-        "Destaque a autoridade fundadora: Planeta Atlântida (2012) e FIFA Copa do Mundo (2014).",
-        "Explique o portfólio triplo: Eventos (nosso carro-chefe), Projetos de PPCI fixos e Treinamento de Brigadas."
-      ]
+      title: "Slide 1: Abertura & Portfólio (Tempo: 0:45)",
+      speech: "Bom dia, BNI! Sou Paulo Ramos da SC Fire. Nascemos em 2012 no Planeta Atlântida e atuamos na Copa de 2014. Nosso foco é Eventos, Projetos e Treinamentos.",
+      bullets: ["Apresente-se com voz firme.", "Destaque nossa presença no Planeta Atlântida e Copa do Mundo.", "Introduza o portfólio triplo."]
     },
     2: {
-      title: "Slide 2: Setor em Floripa & Os Riscos (Tempo: 1:00)",
-      speech: "Para a comunidade de Florianópolis, o setor de serviços e turismo de eventos é vital: representa 76,1% do PIB municipal...",
-      bullets: [
-        "Apresente os números estratégicos: serviços correspondem a 76,1% do PIB de Floripa.",
-        "Diga o faturamento: Grandes eventos movimentam mais de R$ 100 Milhões em apenas 1 mês na cidade.",
-        "Dores do cliente: Falhas geram embargos na véspera, danos à reputação e sérias consequências civis e criminais."
-      ]
+      title: "Slide 2: Setor em Floripa & Riscos (Tempo: 0:45)",
+      speech: "Em Floripa, eventos geram 76,1% do PIB de serviços. Erros geram embargos de última hora e sérios riscos civis e criminais.",
+      bullets: ["Apresente o PIB de 76,1%.", "Explique a movimentação de R$ 100 Milhões em eventos.", "Destaque o risco real de cancelamentos e embargos."]
     },
     3: {
-      title: "Slide 3: O Flow do Nosso Trabalho (Tempo: 1:10)",
-      speech: "Para blindar os organizadores de eventos, a SC Fire desenvolveu um fluxo cirúrgico em 4 etapas: Análise, Documentação, Dimensionamento e Operação...",
-      bullets: [
-        "Fase 1 (Briefing): Mapeamento de riscos, cálculo de lotação e vistorias de palcos/tendas.",
-        "Fase 2 (Documentação): Projetos de segurança temporários, ARTs e trâmite ágil junto ao CBMSC.",
-        "Fase 3 (Dimensionamento): Dimensionamento exato e legal de brigada particular.",
-        "Fase 4 (Operação): Vistoria técnica no dia do evento e brigada ativa em prontidão."
-      ]
+      title: "Slide 3: O Flow do Nosso Trabalho (Tempo: 0:45)",
+      speech: "Blindamos sua operação em 4 passos: Briefing de risco, Documentação e ART, Dimensionamento e Vistoria Operacional ativa.",
+      bullets: ["Apresente as 4 etapas com confiança.", "Explique o briefing prévio de palcos e tendas.", "Garanta segurança operacional no dia do evento."]
     },
     4: {
-      title: "Slide 4: Estudo de Caso — O Acidente do Centrosul 2015 (Tempo: 1:00)",
-      speech: "E para entendermos a gravidade do que evitamos, eu trago o acidente emblemático do Centrosul em 2015, quando um painel de LED de uma tonelada desabou...",
-      bullets: [
-        "Fale sobre o painel de LED de uma tonelada que desabou no Centrosul in 2015, ferindo 6 pessoas.",
-        "Causas: projeto alterado sem aval dos Bombeiros e sem engenheiro responsável (falha de ART).",
-        "A resposta SC Fire: Para nós, a segurança estrutural é lei. Exigimos ARTs de montagem e mantemos vistorias rígidas."
-      ]
+      title: "Slide 4: Caso Centrosul 2015 (Tempo: 0:45)",
+      speech: "Em 2015, um painel de LED desabou no Centrosul ferindo 6 pessoas por falta de ART e alteração de projeto técnica. Nós evitamos isso.",
+      bullets: ["Conte o caso do painel de LED de uma tonelada.", "Frise a causa: montagem sem ART e sem alvará de bombeiros.", "Posicione a SC Fire como garantia técnica."]
     },
     5: {
-      title: "Slide 5: Como nos Indicar (Tempo: 1:00)",
-      speech: "Eu procuro conexões estratégicas com Organizadores de Eventos (sociais e corporativos), Agências de Live Marketing e proprietários de Centros de Eventos, Buffets ou Espaços...",
-      bullets: [
-        "Nossos parceiros ideais no BNI: Organizadores de Eventos, Agências de Live Marketing e donos de Espaços e Centros de Convenções.",
-        "Gatilhos de conversa para ouvir: 'Não consigo liberar o alvará temporário e meu evento é sábado', 'O bombeiro barrou meu projeto de palco'."
-      ]
+      title: "Slide 5: Ação Rápida 60 Segundos (Tempo: 0:45)",
+      speech: "Enquanto o socorro oficial leva 10+ minutos para chegar, o primeiro minuto combatido por brigadistas locais salva vidas e empresas.",
+      bullets: ["Explique a matemática de tempo de resposta.", "O primeiro minuto é crucial no combate de princípios.", "Valorize o treinamento de brigada local."]
     },
     6: {
-      title: "Slide 6: Fechamento & Contato (Tempo: 1:00)",
-      speech: "Lembre-se: em segurança de eventos, a sorte não é um plano de ação viável. Escaneie o QR Code para acessar nosso Instagram, seguir a SC Fire e conhecer o nosso dia a dia operacional!",
-      bullets: [
-        "Aponte para o slide destacando seu nome, foto e o QR Code direcionando para o perfil do Instagram.",
-        "Bordão Final: 'SC Fire: A segurança que seu evento precisa, a tranquilidade que você merece!'"
-      ]
+      title: "Slide 6: Estruturas Temporárias - IN 24 (Tempo: 0:45)",
+      speech: "Sob a IN 24, fiscalizamos rigorosamente palcos, camarotes e arquibancadas. Emitimos laudos de engenharia para evitar desabamentos estruturais.",
+      bullets: ["Apresente a IN 24 do CBMSC para estruturas temporárias.", "Mencione a segurança de arquibancadas e palcos de shows.", "Enfatize a responsabilidade técnica corporativa."]
+    },
+    7: {
+      title: "Slide 7: Planos de Emergência (Tempo: 0:45)",
+      speech: "Mapeamos rotas de fuga, sinalização fotoluminescente e larguras exatas de saídas para garantir evacuações seguras e sem pânico coletivo.",
+      bullets: ["Explique o cálculo de vazão de saídas de emergência.", "Apresente as sinalizações ativas de pânico.", "Mostre como evitamos aglomerações e pisoteamentos."]
+    },
+    8: {
+      title: "Slide 8: Brigada de Prontidão (Tempo: 0:45)",
+      speech: "Fornecemos brigadistas particulares altamente treinados para atuar na prevenção técnica, primeiros socorros de RCP e contenções rápidas.",
+      bullets: ["Foque no treinamento dos bombeiros civis fornecidos.", "Fale sobre a prontidão no local do início ao fim.", "Destaque a capacidade de primeiros socorros."]
+    },
+    9: {
+      title: "Slide 9: ROI em Prevenção (Tempo: 0:35)",
+      speech: "Contratar a SC Fire reduz custos em prêmios de seguro de responsabilidade civil e blinda judicialmente os diretores e organizadores.",
+      bullets: ["Explique a redução de custos nos seguros de eventos.", "Mostre a blindagem judicial obtida pelas ARTs emitidas.", "Conclua que prevenir é infinitamente mais barato."]
+    },
+    10: {
+      title: "Slide 10: Fechamento & Contato (Tempo: 0:25)",
+      speech: "Lembre-se: em segurança de eventos, a sorte não é um plano de ação viável. Escaneie o QR Code, siga nosso Instagram e conte com a SC Fire!",
+      bullets: ["Aponte para o QR Code de contato.", "Bordão: A segurança que seu evento precisa, a tranquilidade que você merece!"]
     }
   },
   projetos: {
     1: {
-      title: "Slide 1: Capa & Credenciais da Engenharia (Tempo: 1:00)",
-      speech: "Bom dia, membros do BNI! Meu nome é Dione Borges, Engenheira Civil e especialista de referência no setor de projetos da SC Fire Engenharia. A nossa história com segurança à vida começou de forma grandiosa: nascemos em 2012 no festival Planeta Atlântida...",
-      bullets: [
-        "Apresente-se com postura técnica de engenharia e voz firme.",
-        "Destaque a autoridade fundadora e as credenciais de alta complexidade.",
-        "Apresente os três pilares de projetos: PPCI Predial, Regularização (AVCB) e Alto Desempenho."
-      ]
+      title: "Slide 1: Capa & Credenciais (Tempo: 0:45)",
+      speech: "Bom dia, BNI! Sou Dione Borges, Engenheira Civil da SC Fire. Nascemos em 2012 e somos especialistas em PPCI predial de alta complexidade.",
+      bullets: ["Apresente suas credenciais com postura técnica.", "Introduza o portfólio de Engenharia de Elite."]
     },
     2: {
-      title: "Slide 2: A Documentação Legal & Os Riscos (Tempo: 1:00)",
-      speech: "O Atestado de Vistoria do Corpo de Bombeiros (ou Habite-se predial) é o escudo legal e patrimonial do seu negócio. Operar sem ele expõe síndicos e donos de empresas a riscos brutais...",
-      bullets: [
-        "Explique o conceito de AVCB / Alvará de Bombeiros como proteção patrimonial ativa.",
-        "Destaque as consequências de operar irregular: Perda de cobertura de seguro, autos de infração e processos civis/criminais.",
-        "Diga que a SC Fire cuida de todo o processo de vistorias técnicas e protocolos."
-      ]
+      title: "Slide 2: Regularização & Riscos (Tempo: 0:45)",
+      speech: "Operar sem Habite-se ou AVCB predial bloqueia apólices de seguro, gera multas pesadas e processos criminais severos para síndicos.",
+      bullets: ["Fale do AVCB como barreira jurídica comercial.", "Mencione a perda de apólice predial em sinistros.", "Explique a responsabilidade civil do síndico."]
     },
     3: {
-      title: "Slide 3: PPCI Além do Novo — Layout & Ocupação (Tempo: 1:10)",
-      speech: "Muitos pensam que o PPCI é só para prédios novos, mas isso é um grande mito! Mudanças de layout e alterações de ocupação exigem a atualização obrigatória do projeto preventivo...",
-      bullets: [
-        "Desmistifique que PPCI serve apenas para obras novas.",
-        "Explique os gatilhos: Alteração de Layout (divisórias, mezaninos que afetam rotas de fuga) e Mudança de Ocupação (escritório que vira restaurante)."
-      ]
+      title: "Slide 3: PPCI em Reformas e Layout (Tempo: 0:45)",
+      speech: "Criar novas salas, erguer mezaninos ou alterar a ocupação muda o cálculo de carga de incêndio e exige atualização obrigatória do PPCI.",
+      bullets: ["Explique a exigência de PPCI em reformas.", "Mudanças de divisórias afetam rotas de fuga.", "Mudança de ocupação exige readequação no CBMSC."]
     },
     4: {
-      title: "Slide 4: Engenharia de Elite — Projeto Baseado em Desempenho (Tempo: 1:00)",
-      speech: "O que fazer quando as normas tradicionais exigem obras inviáveis ou que custariam centenas de milhares de reais? Aplicamos a Engenharia de Desempenho...",
-      bullets: [
-        "Apresente o conceito de PBD (Projeto Baseado em Desempenho) como alternativa científica e legal às regras prescritivas rígidas e caras.",
-        "Destaque a otimização de custos e economia de materiais obtida através de cálculos de evacuação real de pessoas."
-      ]
+      title: "Slide 4: Fluidodinâmica CFD 3D (Tempo: 0:45)",
+      speech: "Aplicamos engenharia baseada em desempenho usando modelagem computacional 3D por fluidodinâmica. Isso reduz custos desnecessários em obras.",
+      bullets: ["Apresente o CFD como engenharia computacional.", "Evitamos exaustores caros usando simulações físicas.", "Mostre a otimização extrema de obras."]
     },
     5: {
-      title: "Slide 5: Dinâmica de Fluidos (CFD) & Veículos Elétricos (Tempo: 0:50)",
-      speech: "E como aplicamos essa engenharia de ponta? Através da fluidodinâmica computacional (CFD) regulamentada pela IN 23 do CBMSC para recargas de carros elétricos em garagens...",
-      bullets: [
-        "Explique as exigências da Instrução Normativa 23 (IN 23) do CBMSC sobre o risco de baterias de lítio em subsolos.",
-        "Apresente a Fluidodinâmica Computacional (CFD) como modelagem 3D computacional de dispersão de calor e fumaça."
-      ]
+      title: "Slide 5: Recarga de Carro Elétrico - IN 23 (Tempo: 0:45)",
+      speech: "Sob a IN 23, baterias de lítio geram calor acima de 1000°C. Projetamos exaustões virtuais sob simulações computacionais de dinâmica de fluidos.",
+      bullets: ["Explique o risco de baterias de lítio em subsolos.", "Apresente as exigências técnicas da IN 23 CBMSC.", "Mostre como a SC Fire aprova estes projetos."]
     },
     6: {
-      title: "Slide 6: Fechamento & Instagram (Tempo: 1:00)",
-      speech: "Lembre-se: em segurança de projetos prediais, a sorte não é um plano de ação viável. Escaneie o QR Code para acessar nosso Instagram, seguir a SC Fire e conhecer o nosso dia a dia operacional!",
-      bullets: [
-        "Aponte para o slide destacando seu nome, foto e o QR Code direcionando para o perfil do Instagram.",
-        "Bordão Final: 'SC Fire: A segurança que seu projeto precisa, a tranquilidade que você merece!'"
-      ]
+      title: "Slide 6: Sistemas de SPDA (Para-raios) (Tempo: 0:45)",
+      speech: "Projetamos malhas de captação e sistemas de aterramento de SPDA. Emitimos os laudos exigidos anualmente pelo Corpo de Bombeiros.",
+      bullets: ["Fale sobre a obrigatoriedade anual de laudos de SPDA.", "Explique as malhas de aterramento em edifícios.", "Mostre a blindagem contra raios e curtos-circuitos."]
+    },
+    7: {
+      title: "Slide 7: Compartimentação de Áreas (Tempo: 0:45)",
+      speech: "Projetamos barreiras corta-fogo em shafts de cabos e portas corta-fogo certificadas para impedir a propagação horizontal e vertical de incêndios.",
+      bullets: ["Explique o isolamento físico de chamas.", "Destaque a segurança das portas corta-fogo em escadas.", "Mostre a contenção de fumaça tóxica entre andares."]
+    },
+    8: {
+      title: "Slide 8: Imóveis Históricos (Tempo: 0:45)",
+      speech: "Aprovamos PPCI em edificações antigas ou tombadas que não possuem recuo ou escadas na norma. Usamos soluções de engenharia diagnóstica.",
+      bullets: ["Mencione a complexidade de regularizar prédios históricos.", "Apresente soluções de engenharia diagnóstica customizada.", "Garantia de aprovação sem alterar estruturas protegidas."]
+    },
+    9: {
+      title: "Slide 9: Cronograma do AVCB (Tempo: 0:35)",
+      speech: "Mapeamos todas as fases: vistoria prévia de conformidade, elaboração do projeto, protocolo digital no portal CBMSC e a vistoria final.",
+      bullets: ["Explique as etapas do processo de licenciamento.", "Fale sobre a agilidade digital nos portais do CBMSC.", "Acompanhamos o vistoriador até a emissão do alvará."]
+    },
+    10: {
+      title: "Slide 10: Fechamento & Contato (Tempo: 0:25)",
+      speech: "Em segurança predial, a sorte não é um plano de ação viável. Escaneie o QR Code, siga nosso Instagram e garanta a regularidade do seu prédio!",
+      bullets: ["Aponte para o QR Code de contato.", "Bordão: A inteligência que seu projeto exige, a segurança que seu prédio precisa!"]
     }
   },
   treinamentos: {
     1: {
-      title: "Slide 1: Capa & Credenciais da Formação (Tempo: 1:00)",
-      speech: "Bom dia, parceiros do BNI! Sou o Sargento BM Murilo Galdino, especialista de referência em Treinamentos e Brigadas da SC Fire. Toda a nossa autoridade operacional acumulada em grandes escalas nós aplicamos na capacitação técnica de brigadas orgânicas e corporativas...",
-      bullets: [
-        "Apresente-se com voz dinâmica de instrutor militar.",
-        "Explique o portfólio de cursos: Brigadas Orgânicas (IN 28), Brigadistas Particulares e Primeiros Socorros homologados."
-      ]
+      title: "Slide 1: Capa & Credenciais (Tempo: 0:45)",
+      speech: "Bom dia, BNI! Sou o Sargento Murilo Galdino, especialista em Brigadas da SC Fire. Capacitamos equipes corporativas sob a Instrução Normativa 28.",
+      bullets: ["Apresente-se com voz firme de instrutor operacional.", "Introduza o portfólio de formação de excelência técnica."]
     },
     2: {
-      title: "Slide 2: A Exigência Técnica da IN 28 (Tempo: 1:00)",
-      speech: "A implantação da brigada de incêndio sob a Instrução Normativa 28 do CBMSC é obrigatória para obter o alvará preventivo e o Habite-se. O PIBI é o nosso foco de regularização...",
-      bullets: [
-        "Explique o conceito da IN 28 do CBMSC e o PIBI (Plano de Implantação da Brigada de Incêndio).",
-        "Diferencie Brigadistas Orgânicos (colaboradores locais) de Brigadistas Particulares (bombeiros civis contratados)."
-      ]
+      title: "Slide 2: Exigência da IN 28 (Tempo: 0:45)",
+      speech: "O Plano de Implantação de Brigada de Incêndio (PIBI) é exigência direta da IN 28 do CBMSC para Habite-se predial e alvarás comerciais.",
+      bullets: ["Explique a IN 28 e a obrigatoriedade da brigada.", "Fale do PIBI nos protocolos de atestado predial.", "Dimensione brigadistas de forma legal e ideal."]
     },
     3: {
-      title: "Slide 3: Teoria Alinhada à Prática Realista (Tempo: 1:10)",
-      speech: "Treinamento medíocre coloca lives em risco. Nosso método foca em teoria aplicada, combate a princípios de chamas com calor real e primeiros socorros de RCP...",
-      bullets: [
-        "Fase 1 (Teoria): Química básica do fogo e detecção de riscos prediais.",
-        "Fase 2 (Prática): Combatendo chamas com extintores e mangueiras sob calor real.",
-        "Fase 3 (Primeiros Socorros): RCP (massagem), desobstrução, contenção de hemorragias (Lei Lucas).",
-        "Fase 4 (Evacuação): Controle de pânico coletivo e rotas de fuga."
-      ]
+      title: "Slide 3: Teoria e Prática Realista (Tempo: 0:45)",
+      speech: "Treinamento realista que quebra o pânico. Ensinamos combate a chamas com calor real, manuseio de mangueiras e primeiros socorros práticos.",
+      bullets: ["Apresente a metodologia ativa real.", "Destaque o combate prático sob calor de verdade.", " RCP e controle de pânico corporativo."]
     },
     4: {
-      title: "Slide 4: Diferenciais Técnicos SC Fire (Tempo: 1:00)",
-      speech: "Não vendemos certificados rápidos e vazios na internet. Oferecemos instrutores engenheiros e bombeiros credenciados na DAT/CBMSC e pistas de treinamento realista de fogo...",
-      bullets: [
-        "Apresente a seriedade técnica da SC Fire: instrutores credenciados e homologados no CBMSC.",
-        "Destaque a pista física de calor real para simulação ativa e quebra de pânico."
-      ]
+      title: "Slide 4: Diferenciais SC Fire (Tempo: 0:45)",
+      speech: "Nossos instrutores são engenheiros especialistas e bombeiros militares da reserva credenciados no CBMSC. Entregamos certificação homologada.",
+      bullets: ["Valorize nossos instrutores homologados.", "Fale do credenciamento oficial na DAT do CBMSC.", "Evite certificações online baratas e vazias."]
     },
     5: {
-      title: "Slide 5: Ação Rápida em 60 Segundos (Tempo: 0:50)",
-      speech: "O tempo médio dos bombeiros oficiais chegarem devido ao trânsito é maior que 10 minutos. O primeiro minuto combatido pelo brigadista orgânico evita uma tragédia...",
-      bullets: [
-        "Apresente a matemática do tempo de resposta: 1 minuto da brigada local contra 10+ minutos do caminhão oficial.",
-        "A brigada é o escudo que evita que pequenos incidentes destruam galpões ou escritórios inteiros."
-      ]
+      title: "Slide 5: Tempo de Resposta (Tempo: 0:45)",
+      speech: "Um caminhão oficial leva mais de 10 minutos para chegar devido ao trânsito. O primeiro minuto combatido na origem pela brigada evita tragédias.",
+      bullets: ["Mostre a linha do tempo e o tempo de resposta.", "O brigadista orgânico é a barreira contra incêndios em expansão.", "Prevenir e treinar salva indústrias e galpões comerciais."]
     },
     6: {
-      title: "Slide 6: Fechamento & Instagram (Tempo: 1:00)",
-      speech: "Lembre-se: em treinamentos de emergência, a sorte não é um plano de ação viável. Escaneie o QR Code, siga o nosso Instagram e capacite quem constrói o seu negócio!",
-      bullets: [
-        "Aponte para o slide destacando seu nome, foto e o QR Code direcionando para o perfil do Instagram.",
-        "Bordão Final: 'SC Fire: A segurança que sua equipe precisa, a tranquilidade que você merece!'"
-      ]
+      title: "Slide 6: Uso do Desfibrilador - DEA (Tempo: 0:45)",
+      speech: "Ensinamos o uso prático do DEA em simulações cardiopulmonares eletrônicas. O uso rápido do equipamento salva mais de 80% das vítimas de parada.",
+      bullets: ["Apresente a importância do DEA na sobrevivência de paradas.", "Mostre o manuseio eletrônico interativo do equipamento.", "Siga as diretrizes de RCP internacionais."]
+    },
+    7: {
+      title: "Slide 7: Atendimento Pré-Hospitalar (APH) (Tempo: 0:45)",
+      speech: "Formamos em imobilizações de membros fraturados, colocação de colares cervicais e pranchamento seguro de vítimas de quedas ou traumas.",
+      bullets: ["Explique a prevenção de lesões secundárias em acidentes.", "Apresente o manuseio de colares e pranchas rígidas.", "Formação alinhada à Lei Lucas nas corporações."]
+    },
+    8: {
+      title: "Slide 8: Simulado de Evacuação Geral (Tempo: 0:45)",
+      speech: "Orquestramos simulados de abandono rápido da edificação sob cronometragem estrita. Ensinamos a guiar centenas de pessoas sem pânico coletivo.",
+      bullets: ["Explique a coordenação de rotas de fuga dinâmicas.", "Mostre como organizar filas rápidas e manter a calma geral.", "Auditoria interna pós-simulado de evacuação."]
+    },
+    9: {
+      title: "Slide 9: Gestão Digital de Validades (Tempo: 0:35)",
+      speech: "Oferecemos o portal SC Fire para acompanhamento em tempo real das validades anuais de brigadas corporativas, facilitando auditorias de RH.",
+      bullets: ["Destaque a facilidade de acompanhamento para o RH.", "Alertas automáticos de validades e agendamento de reciclagens.", "Acesso rápido a todos os certificados homologados."]
+    },
+    10: {
+      title: "Slide 10: Fechamento & Contato (Tempo: 0:25)",
+      speech: "Em salvamentos e emergências, a sorte não é um plano de ação viável. Escaneie o QR Code, siga nosso Instagram e capacite sua equipe corporativa!",
+      bullets: ["Aponte para o QR Code de contato.", "Bordão: A preparação que sua equipe exige, a tranquilidade que você merece!"]
     }
   },
   consultoria: {
     1: {
-      title: "Slide 1: Capa & Credenciais da Consultoria (Tempo: 1:00)",
-      speech: "Bom dia, membros do BNI! Sou Paulo Roberto Ramos e represento a SC Fire Consultoria. Atuamos como consultores técnicos auditando grandes edificações comerciais...",
-      bullets: [
-        "Apresente-se com voz sóbria de consultor técnico corporativo.",
-        "Defina as três frentes: Vistoria Diagnóstica, Laudos de Conformidade e Renovação de Alvará (AVCB)."
-      ]
+      title: "Slide 1: Capa & Credenciais (Tempo: 0:45)",
+      speech: "Bom dia, BNI! Sou Paulo Ramos da SC Fire. Atuamos com auditorias diagnósticas preventivas em condomínios e indústrias de grande porte.",
+      bullets: ["Apresente credenciais de consultoria executiva.", "Apresente a auditoria como blindagem empresarial ativa."]
     },
     2: {
-      title: "Slide 2: Por que Consultoria Preventiva? (Tempo: 1:00)",
-      speech: "A maioria dos gestores e síndicos só se lembra dos bombeiros quando a fiscalização oficial bate de surpresa na porta. A consultoria diagnóstica age antes da dor...",
-      bullets: [
-        "Explique o valor da auditoria prévia antes da fiscalização oficial.",
-        "Os riscos do atraso: Multas pesadas, embargos surpresa de portas fechadas e recusa de seguradoras prediais."
-      ]
+      title: "Slide 2: Por que Consultoria Preventiva? (Tempo: 0:45)",
+      speech: "A fiscalização oficial pune de surpresa. Nossa vistoria diagnóstica preventiva caça irregularidades antes dos bombeiros para evitar embargos.",
+      bullets: ["Evite o estresse de fiscalizações e lacrações surpresas.", "Mencione multas pecuniárias expressivas do Corpo de Bombeiros.", "Proteja os condomínios comerciais e residenciais."]
     },
     3: {
-      title: "Slide 3: Vistoria Preventiva de Diagnóstico (Tempo: 1:10)",
-      speech: "Nossa pré-vistoria técnica age de forma implacável caçando falhas ocultas em hidrantes, extintores, sinalizações fotoluminescentes, portas corta-fogo e SPDA...",
-      bullets: [
-        "Apresente as 4 fases da pré-vistoria técnica: 1. Equipamentos, 2. Rotas de Fuga, 3. Compartimentação, 4. Instalações (SPDA/Gás)."
-      ]
+      title: "Slide 3: Vistoria Diagnóstica Completa (Tempo: 0:45)",
+      speech: "Realizamos vistorias minuciosas em alarmes, hidrantes, sinalizações, portas corta-fogo, gás canalizado e sistemas de captação de SPDA.",
+      bullets: ["Apresente a varredura física completa de instalações.", "Auditoria de portas corta-fogo, hidrantes e extintores.", "Verificação das conformidades elétricas e de gás."]
     },
     4: {
-      title: "Slide 4: Laudos & Relatórios de Engenharia (Tempo: 1:00)",
-      speech: "Entregamos um Laudo Técnico de Conformidade e um Relatório de Engenharia oficial. Ele serve de bússola para a manutenção predial e prova documental ativa de compliance...",
-      bullets: [
-        "Explique o valor do Laudo de Engenharia assinado por especialistas da SC Fire.",
-        "O documento serve de guia sem rodeios para a equipe predial e blinda o síndico civilmente."
-      ]
+      title: "Slide 4: Laudos & Relatórios Fotográficos (Tempo: 0:45)",
+      speech: "Geramos Laudos Técnicos assinados por engenheiros com relatórios de não-conformidades. Um guia sem rodeios para sua manutenção predial.",
+      bullets: ["Apresente o laudo técnico com ART assinada.", "O relatório fornece bússola clara para a equipe predial.", "Blindagem judicial direta para o síndico e diretores."]
     },
     5: {
-      title: "Slide 5: Assessoria em Renovação sem Dores (Tempo: 0:50)",
-      speech: "Renovar o atestado predial dos bombeiros gera enorme estresse. Assumimos 100% dessa responsabilidade: protocolamos nos portais digitais e acompanhamos o vistoriador no dia...",
-      bullets: [
-        "Identifique a maior dor do síndico comercial: o estresse do vencimento do atestado de bombeiros.",
-        "Nossa assessoria atua no processo digital completo do CBMSC, agendando e acompanhando a vistoria oficial até a entrega do alvará na mão."
-      ]
+      title: "Slide 5: Renovação Digital do Atestado (Tempo: 0:45)",
+      speech: "Assumimos 100% da burocracia digital nos portais do CBMSC. Agendamos e acompanhamos o vistoriador oficial no dia até emitir o alvará.",
+      bullets: ["Fim da burocracia digital nos portais do Corpo de Bombeiros.", "Agendamos e acompanhamos o vistoriador oficial no condomínio.", "Entrega do alvará finalizado em suas mãos."]
     },
     6: {
-      title: "Slide 6: Fechamento & Instagram (Tempo: 1:00)",
-      speech: "Em segurança de grandes edificações comerciais, a prevenção ativa é a única apólice real de sobrevivência. Não espere a fiscalização, chame a SC Fire Consultoria!",
-      bullets: [
-        "Aponte para o slide destacando seu nome, foto e o QR Code direcionando para o perfil do Instagram.",
-        "Bordão Final: 'SC Fire: A segurança que seu projeto precisa, a tranquilidade que você merece!'"
-      ]
+      title: "Slide 6: Auditorias Semestrais (Tempo: 0:45)",
+      speech: "Criamos rotinas de inspeção proativa a cada seis meses. Isso garante que todos os equipamentos estejam operacionais durante o ano todo.",
+      bullets: ["Rotina semestral preventiva de manutenção ativa.", "Testes práticos de detecção e alarmes periódicos.", "Substituição e manutenção antes de falhas reais ocorrerem."]
+    },
+    7: {
+      title: "Slide 7: Sensores de Alarme e Detecção (Tempo: 0:45)",
+      speech: "Auditamos o tempo de resposta de sensores endereçáveis e centrais de alarmes, garantindo detecção precoce em subsolos e shafts.",
+      bullets: ["Apresente o teste de sensores ópticos e térmicos.", "Conformidade das botoeiras e centrais de incêndio.", "Foco em prevenção contra princípios ocultos de fogo."]
+    },
+    8: {
+      title: "Slide 8: Hidrantes e Bombas de Incêndio (Tempo: 0:45)",
+      speech: "Medimos a pressão dinâmica nas caixas de incêndio e realizamos testes hidrostáticos em mangueiras para evitar vazamentos em emergências.",
+      bullets: ["Explique os testes de vazão e pressão dinâmica.", "Garante mangueiras desobstruídas e sem rachaduras.", "Manutenção ativa da bomba principal elétrica e de pressurização."]
+    },
+    9: {
+      title: "Slide 9: Mitigação de Riscos de Seguros (Tempo: 0:35)",
+      speech: "A auditoria técnica da SC Fire reduz o valor da franquia das apólices corporativas e garante o pagamento integral em caso de sinistros.",
+      bullets: ["Negociação de seguros baseada em conformidade predial.", "Redução de custos anuais de apólices condominiais.", "Garantia de segurança máxima de reembolso."]
+    },
+    10: {
+      title: "Slide 10: Fechamento & Contato (Tempo: 0:25)",
+      speech: "Em grandes estruturas comerciais, prevenir ativamente é a única apólice real de sobrevivência. Chame a SC Fire Consultoria!",
+      bullets: ["Aponte para o QR Code de contato.", "Bordão: A conformidade que seu imóvel exige, a tranquilidade que você merece!"]
     }
   }
 };
 
-const SLIDE_TARGETS_CUMULATIVE = [60, 120, 190, 250, 300, 420];
+const SLIDE_TARGETS_CUMULATIVE = [45, 90, 135, 180, 225, 270, 315, 360, 395, 420];
 
 function UnifiedApresentacaoPageContent() {
   const supabase = createClient();
@@ -789,7 +789,7 @@ function UnifiedApresentacaoPageContent() {
 
   /* ═══ Core BNI Slide Navigation Actions ═══ */
   const nextBniSlide = () => {
-    setCurrentSlideIndex((prev) => Math.min(prev + 1, 5));
+    setCurrentSlideIndex((prev) => Math.min(prev + 1, 9));
   };
 
   const prevBniSlide = () => {
@@ -1390,8 +1390,333 @@ function UnifiedApresentacaoPageContent() {
                 </div>
               )}
 
-              {/* BNI Slide 6: Final Slide / Contacts & References */}
+                            {/* BNI Slide 5: Ação 60 Segundos (Eventos/Treinamentos/Consultoria) ou SAVE Bateria de Lítio (Projetos) */}
+              {currentSlideIndex === 4 && (
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center">
+                  {activeDeck === "projetos" ? (
+                    <>
+                      {/* Lithium battery thermal CFD simulation model */}
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold max-w-fit uppercase tracking-wider animate-pulse">
+                        <BatteryCharging className="w-4 h-4" />
+                        <span>Carros Elétricos — Risco Térmico IN 23</span>
+                      </div>
+
+                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                        Segurança em Pontos de Recarga: <span className="text-amber-500">Simulação de Bateria Coletiva</span>
+                      </h2>
+
+                      <div className="grid grid-cols-2 gap-8 w-full">
+                        {/* Simulation Screen */}
+                        <div className="relative rounded-2xl border border-white/[0.08] bg-[#06070a] h-[300px] overflow-hidden flex items-center justify-center group shadow-2xl">
+                          <div className="absolute inset-0 grid-mesh opacity-20 pointer-events-none" />
+                          <div className="absolute inset-0 m-auto w-[90%] h-[80%] border border-dashed border-amber-500/15 rounded-xl flex items-center justify-center">
+                            <span className="text-[10px] text-amber-500/40 uppercase tracking-widest font-mono absolute top-4">IN 23 SAVE - Lithium Thermal Test</span>
+                            
+                            {/* Scanning laser line */}
+                            <div className="absolute left-0 right-0 h-[2px] bg-sky-400/60 shadow-[0_0_12px_#38bdf8] animate-laser z-10" />
+
+                            {/* Simulated smoke puff elements */}
+                            <div className="absolute bottom-[-10px] left-[15%] w-36 h-36 bg-white/[0.03] rounded-full blur-xl animate-smoke-1" />
+                            <div className="absolute bottom-[-10px] left-[45%] w-40 h-40 bg-white/[0.04] rounded-full blur-xl animate-smoke-2" />
+                            <div className="absolute bottom-[-10px] right-[15%] w-32 h-32 bg-white/[0.03] rounded-full blur-xl animate-smoke-3" />
+
+                            {/* Battery design icon with red glowing pulse */}
+                            <div className="flex flex-col items-center space-y-3 relative z-20">
+                              <div className="w-32 h-16 rounded-xl border-4 border-white/20 bg-white/5 relative flex items-center justify-center shadow-inner overflow-hidden">
+                                <div className="absolute left-0 top-0 bottom-0 bg-red-600/30 animate-thermal-pulse" style={{ width: "70%" }} />
+                                <span className="text-red-500 font-bold font-mono text-sm animate-pulse">65°C CRITICAL</span>
+                              </div>
+                              <span className="text-[10px] text-red-500/80 font-bold uppercase tracking-widest font-mono">BATERIA LÍTIO ACTIVE</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Text explanation */}
+                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-between text-left h-[300px]">
+                          <div className="space-y-4">
+                            <h3 className="text-base font-bold text-white">Instrução Normativa 23 do CBMSC</h3>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                              Baterias de carros elétricos em subsolos geram fumaça extremamente tóxica e calor superior a 1000°C.
+                            </p>
+                            <div className="space-y-3.5 pt-2">
+                              <div className="flex gap-2 items-start text-xs text-gray-300">
+                                <CheckCircle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                                <span>A SC Fire projeta sistemas automatizados de controle de dispersão de calor e fumaça em garagens.</span>
+                              </div>
+                              <div className="flex gap-2 items-start text-xs text-gray-300">
+                                <CheckCircle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                                <span>Total conformidade com o regramento mais moderno do Corpo de Bombeiros (SAVE).</span>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="text-[10px] text-amber-500 font-bold uppercase tracking-wider">SC FIRE — CONSULTORIA TÉCNICA DE ALTO DESEMPENHO</span>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Slide 5: Response Time display (Eventos / Treinamentos / Consultoria) */}
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold max-w-fit uppercase tracking-wider">
+                        <Activity className="w-4 h-4" />
+                        <span>Matemática do Tempo de Resposta</span>
+                      </div>
+
+                      <h2 className="text-3xl font-extrabold tracking-tight text-white font-display text-left">
+                        Ação Rápida em 60 Segundos: <span className="text-emerald-400">Como Evitamos Tragédias</span>
+                      </h2>
+
+                      <div className="grid grid-cols-2 gap-8 w-full">
+                        {/* Simulation Screen */}
+                        <div className="cfd-response-display w-full">
+                          <div className="response-timeline">
+                            <div className="response-node node-brigade">
+                              <div className="flex justify-between items-center w-full">
+                                <span className="node-label">Brigada Orgânica SC Fire</span>
+                                <span className="node-badge-time">01 min (Ação)</span>
+                              </div>
+                              <div className="node-bar-container">
+                                <div className="node-bar bar-green" style={{ width: "20%" }} />
+                              </div>
+                              <span className="node-status text-green text-left">Princípio de incêndio controlado na origem.</span>
+                            </div>
+
+                            <div className="response-node node-bombeiros">
+                              <div className="flex justify-between items-center w-full">
+                                <span className="node-label">Bombeiros Oficiais (Tempo Médio)</span>
+                                <span className="node-badge-time">10+ min (Caminhão)</span>
+                              </div>
+                              <div className="node-bar-container">
+                                <div className="node-bar bar-red" style={{ width: "100%" }} />
+                              </div>
+                              <span className="node-status text-red text-left">Grandes estragos estruturais e risco severo.</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Text explanation */}
+                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-between text-left h-[300px]">
+                          <div className="space-y-4">
+                            <h3 className="text-base font-bold text-white">Por que Treinar Colaboradores?</h3>
+                            <p className="text-xs text-gray-400 leading-relaxed">
+                              Devido ao trânsito, o tempo de resposta do caminhão oficial pode ultrapassar 10 minutos. O primeiro minuto combatido localmente decide o futuro patrimonial e humano da edificação.
+                            </p>
+                            <div className="space-y-3.5 pt-2">
+                              <div className="flex gap-2 items-start text-xs text-gray-300">
+                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>**Extinção Imediata:** A brigada atua combatendo a chama no princípio absoluto do foco.</span>
+                              </div>
+                              <div className="flex gap-2 items-start text-xs text-gray-300">
+                                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                                <span>**Controle de Pânico:** Colaboradores treinados orquestram saídas de emergência ordenadas.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">A SUA EQUIPE COMO ESCUDO PREVENTIVO ATIVO</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* BNI Slide 6 (NOVO): Aprofundamento Pilar A (Tempo: 0:45) */}
               {currentSlideIndex === 5 && (
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center animate-fade-in">
+                  <div className="section-tag warning-tag">
+                    <Sliders className="w-4 h-4" />
+                    <span>{activeDeck === "eventos" ? "Estruturas Temporárias" : activeDeck === "projetos" ? "Sistemas SPDA" : activeDeck === "treinamentos" ? "Uso de DEA" : "Auditorias Periódicas"}</span>
+                  </div>
+                  <h2 className="slide-title">
+                    {activeDeck === "eventos" && <>Estruturas e Segurança em Grandes Shows: <span className="gradient-text">IN 24</span></>}
+                    {activeDeck === "projetos" && <>Proteção Contra Descargas Atmosféricas: <span className="gradient-text red-grad">SPDA</span></>}
+                    {activeDeck === "treinamentos" && <>Manuseio Avançado de Desfibrilador: <span className="gradient-text red-grad">Uso Prático de DEA</span></>}
+                    {activeDeck === "consultoria" && <>Inspeções Técnicas Semestrais: <span className="gradient-text blue-grad">Varreduras Proativas</span></>}
+                  </h2>
+                  <div className="grid-2col">
+                    <div className="pain-card">
+                      <h3 className="font-bold text-lg text-white">
+                        {activeDeck === "eventos" ? "Vistorias de Palcos e Tendas" : activeDeck === "projetos" ? "Laudo Técnico e Aterramento" : activeDeck === "treinamentos" ? "Prática com Simulador Eletrônico" : "Checklist Físico Geral"}
+                      </h3>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {activeDeck === "eventos" && "Palcos monumentais e arquibancadas exigem vistorias estruturais diárias e cálculo estrito de carga máxima."}
+                        {activeDeck === "projetos" && "A malha de captação superior e o aterramento predial devem ser testados anualmente para obter continuidade técnica."}
+                        {activeDeck === "treinamentos" && "Ensinamos o correto posicionamento dos eletrodos e a interpretação rápida dos avisos sonoros da central eletrônica."}
+                        {activeDeck === "consultoria" && "Auditorias minuciosas programadas duas vezes ao ano evitam o acúmulo de inconformidades e blindam a administração."}
+                      </p>
+                      <div className="quick-facts mt-2">
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "100% ART" : activeDeck === "projetos" ? "Anual" : activeDeck === "treinamentos" ? "80% Vida" : "Prevenção"}</span>
+                          <span className="fact-label">
+                            {activeDeck === "eventos" ? "Garantia de engenharia assinada em todas as montagens." : activeDeck === "projetos" ? "Exigência direta de renovação do atestado de bombeiros." : activeDeck === "treinamentos" ? "Aumento drástico de sobrevida em paradas rápidas." : "Detecção e contenção imediata de pendências prediais."}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-center space-y-3">
+                      <h4 className="text-sm font-bold text-red-500 flex items-center gap-1.5 uppercase">
+                        <ShieldCheck className="w-4 h-4 text-red-500" />
+                        O Ponto Chave da SC Fire
+                      </h4>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        {activeDeck === "eventos" && "Não deixamos montadores improvisarem. Exigimos projetos técnicos e ARTs estruturais de engenheiros credenciados."}
+                        {activeDeck === "projetos" && "Medimos a resistividade do solo e emitimos laudos oficiais com ART para garantir a conformidade jurídica."}
+                        {activeDeck === "treinamentos" && "Colocamos o desfibrilador prático na mão do seu colaborador de forma interativa, quebrando o pânico de emergências."}
+                        {activeDeck === "consultoria" && "Substituímos e reparamos peças preventivamente antes da quebra, eliminando surpresas na vistoria oficial."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* BNI Slide 7 (NOVO): Aprofundamento Pilar B (Tempo: 0:45) */}
+              {currentSlideIndex === 6 && (
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center animate-fade-in">
+                  <div className="section-tag success-tag">
+                    <Activity className="w-4 h-4" />
+                    <span>{activeDeck === "eventos" ? "Fluxo e Escapes" : activeDeck === "projetos" ? "Barreiras Físicas" : activeDeck === "treinamentos" ? "Primeiro Socorro" : "Sistemas Alarme"}</span>
+                  </div>
+                  <h2 className="slide-title">
+                    {activeDeck === "eventos" && <>Dimensionamento de Rotas e Escapes Ativos: <span className="gradient-text">Evasão Segura</span></>}
+                    {activeDeck === "projetos" && <>Compartimentação Física de Áreas: <span className="gradient-text red-grad">Corta-Fogo</span></>}
+                    {activeDeck === "treinamentos" && <>Atendimento Pré-Hospitalar Básico: <span className="gradient-text red-grad">Formação APH</span></>}
+                    {activeDeck === "consultoria" && <>Centrais e Sensores Endereçáveis: <span className="gradient-text blue-grad">Detecção Cirúrgica</span></>}
+                  </h2>
+                  <div className="grid-2col">
+                    <div className="pain-card">
+                      <h3 className="font-bold text-lg text-white">
+                        {activeDeck === "eventos" ? "Cálculo de Fluxo de Lotação" : activeDeck === "projetos" ? "Isolamento Corta-Fogo em Shafts" : activeDeck === "treinamentos" ? "Imobilização e Colar Cervical" : "Sinalização e Detecção Endereçável"}
+                      </h3>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {activeDeck === "eventos" && "Planejamento dinâmico de saídas de emergência e corredores livres calculados com base no público máximo."}
+                        {activeDeck === "projetos" && "Portas corta-fogo homologadas e selagens resistentes a chamas em aberturas de passagens elétricas condominiais."}
+                        {activeDeck === "treinamentos" && "Técnicas de pranchamento rígido de fraturas e colocação de colares de imobilização para quedas prediais."}
+                        {activeDeck === "consultoria" && "Testes de fumaça reais nos detectores e auditoria operacional das centrais endereçáveis da edificação."}
+                      </p>
+                      <div className="quick-facts mt-2">
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "Saídas" : activeDeck === "projetos" ? "4 Horas" : activeDeck === "treinamentos" ? "Lei Lucas" : "Sensores"}</span>
+                          <span className="fact-label">
+                            {activeDeck === "eventos" ? "Larguras de passagem otimizadas contra aglomerações e pânico." : activeDeck === "projetos" ? "Tempo de contenção física de chamas certificado em portas." : activeDeck === "treinamentos" ? "Atendimento inicial rápido e obrigatório em escolas e indústrias." : "Localização exata de princípios no painel central endereçável."}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-center space-y-3">
+                      <h4 className="text-sm font-bold text-red-500 flex items-center gap-1.5 uppercase">
+                        <Building2 className="w-4 h-4 text-red-500" />
+                        A Diferença SC Fire
+                      </h4>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        {activeDeck === "eventos" && "Desenhamos rotas de fuga fotoluminescentes ativas, sinalizando claramente saídas mesmo em blecaute."}
+                        {activeDeck === "projetos" && "Garantimos compartimentação total de cabos, impedindo que a fumaça de incêndio invada escadas ou elevadores."}
+                        {activeDeck === "treinamentos" && "Alinhamos os treinamentos de APH às regras legais e práticas da CLT e da Secretaria de Educação."}
+                        {activeDeck === "consultoria" && "Limpamos e calibramos sensores ópticos de detecção periodicamente para evitar falsos alarmes prediais."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* BNI Slide 8 (NOVO): Aprofundamento Pilar C (Tempo: 0:45) */}
+              {currentSlideIndex === 7 && (
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center animate-fade-in">
+                  <div className="section-tag info-tag">
+                    <Award className="w-4 h-4" />
+                    <span>{activeDeck === "eventos" ? "Brigada Dedicada" : activeDeck === "projetos" ? "Engenharia Histórica" : activeDeck === "treinamentos" ? "Plano Prático" : "Hidráulica Activa"}</span>
+                  </div>
+                  <h2 className="slide-title">
+                    {activeDeck === "eventos" && <>O Papel do Brigadista Particular em Shows: <span className="gradient-text">Efetivo de Elite</span></>}
+                    {activeDeck === "projetos" && <>Prédios Tombados e Imóveis Antigos: <span className="gradient-text red-grad">Soluções Especiais</span></>}
+                    {activeDeck === "treinamentos" && <>Coordenação Geral de Simulados: <span className="gradient-text red-grad">Abandono de Área</span></>}
+                    {activeDeck === "consultoria" && <>Testes de Hidrantes e Mangueiras: <span className="gradient-text blue-grad">Força Dinâmica</span></>}
+                  </h2>
+                  <div className="grid-2col">
+                    <div className="pain-card">
+                      <h3 className="font-bold text-lg text-white">
+                        {activeDeck === "eventos" ? "Prevenção Operacional e Socorrismo" : activeDeck === "projetos" ? "PPCI Baseado em Desempenho Histórico" : activeDeck === "treinamentos" ? "Simulação Coordenada Anual de Abandono" : "Pressão de Bombas e Hidrostática"}
+                      </h3>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {activeDeck === "eventos" && "Bombeiros civis dedicados caçando riscos ativamente no evento e realizando atendimentos iniciais."}
+                        {activeDeck === "projetos" && "Aprovação de projetos preventivos em edificações tombadas ou antigas sem recuo através de Engenharia de Desempenho."}
+                        {activeDeck === "treinamentos" && "Organização de evacuações cronometradas com toda a população do condomínio residencial ou empresa."}
+                        {activeDeck === "consultoria" && "Medição da pressão dinâmica nos hidrantes mais desfavoráveis e testes hidrostáticos de mangueiras prediais."}
+                      </p>
+                      <div className="quick-facts mt-2">
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "Resgate" : activeDeck === "projetos" ? "Legado" : activeDeck === "treinamentos" ? "3 Minutos" : "Pressão"}</span>
+                          <span className="fact-label">
+                            {activeDeck === "eventos" ? "Atuação técnica contínua sob o menor tempo de resposta no local." : activeDeck === "projetos" ? "Adequação sem mexer ou danificar a arquitetura tombada." : activeDeck === "treinamentos" ? "Meta de evacuação rápida obtida após treino de liderança." : "Garantia de vazão e hidrantes sem rachaduras operacionais."}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-center space-y-3">
+                      <h4 className="text-sm font-bold text-red-500 flex items-center gap-1.5 uppercase">
+                        <Warehouse className="w-4 h-4 text-red-500" />
+                        O Selo SC Fire
+                      </h4>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        {activeDeck === "eventos" && "Nossos profissionais são bombeiros civis com reciclagens técnicas ativas e controle tático sob calor real."}
+                        {activeDeck === "projetos" && "Aprovamos PPCI em edificações tombadas usando PBD sem descaracterizar a edificação histórica."}
+                        {activeDeck === "treinamentos" && "Ensinamos o líder de brigada de cada andar a comandar a evasão mantendo a população calma e segura."}
+                        {activeDeck === "consultoria" && "Realizamos testes de estanqueidade física e pressão hidrostática sob laudo fotográfico com ART oficial."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* BNI Slide 9 (NOVO): Benefício / Financeiro / Cronograma (Tempo: 0:35) */}
+              {currentSlideIndex === 8 && (
+                <div className="slide-content text-left w-full h-full flex flex-col justify-center animate-fade-in">
+                  <div className="section-tag referral-tag">
+                    <Coins className="w-4 h-4" />
+                    <span>{activeDeck === "eventos" ? "Retorno e Prevenção" : activeDeck === "projetos" ? "Cronograma e Prazos" : activeDeck === "treinamentos" ? "Validação e Validade" : "Mitigação Seguros"}</span>
+                  </div>
+                  <h2 className="slide-title">
+                    {activeDeck === "eventos" && <>Retorno de Investimento em Segurança: <span className="gradient-text">Proteção Ativa</span></>}
+                    {activeDeck === "projetos" && <>Fases e Prazos do Licenciamento CBMSC: <span className="gradient-text red-grad">AVCB Sem Dores</span></>}
+                    {activeDeck === "treinamentos" && <>Portal SC Fire de Controle Técnico: <span className="gradient-text red-grad">Gestão Inteligente</span></>}
+                    {activeDeck === "consultoria" && <>Mitigação de Riscos de Seguros Prediais: <span className="gradient-text blue-grad">Apólices Blindadas</span></>}
+                  </h2>
+                  <div className="grid-2col">
+                    <div className="pain-card">
+                      <h3 className="font-bold text-lg text-white">
+                        {activeDeck === "eventos" ? "Evite Custos Brutais de Embargos" : activeDeck === "projetos" ? "Transparência Total no Cronograma" : activeDeck === "treinamentos" ? "Facilidade de Controle para RH" : "Redução Drástica na Franquia"}
+                      </h3>
+                      <p className="text-xs text-gray-400 leading-relaxed">
+                        {activeDeck === "eventos" && "Prevenir com a SC Fire evita o cancelamento completo do show e a responsabilização civil de diretores."}
+                        {activeDeck === "projetos" && "Dividimos o processo em etapas claras: vistoria, elaboração técnica do PPCI, aprovação e vistoria final."}
+                        {activeDeck === "treinamentos" && "Acompanhe a validade anual da brigada corporativa por meio do portal inteligente, evitando multas."}
+                        {activeDeck === "consultoria" && "Manter laudos e ARTs preventivas anuais assegura o pagamento de indenização integral de seguradoras."}
+                      </p>
+                      <div className="quick-facts mt-2">
+                        <div className="fact-item">
+                          <span className="fact-number">{activeDeck === "eventos" ? "ROI" : activeDeck === "projetos" ? "Etapas" : activeDeck === "treinamentos" ? "RH Ativo" : "Liquidez"}</span>
+                          <span className="fact-label">
+                            {activeDeck === "eventos" ? "Segurança jurídica que reduz custos de seguros corporativos de eventos." : activeDeck === "projetos" ? "Prazos do Corpo de Bombeiros controlados digitalmente." : activeDeck === "treinamentos" ? "Controle automatizado de reciclagens sem preocupações prediais." : "Garantia técnica de conformidade predial sem cortes securitários."}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex flex-col justify-center space-y-3">
+                      <h4 className="text-sm font-bold text-red-500 flex items-center gap-1.5 uppercase">
+                        <HeartHandshake className="w-4 h-4 text-red-500" />
+                        O Compromisso SC Fire
+                      </h4>
+                      <p className="text-xs text-gray-300 leading-relaxed">
+                        {activeDeck === "eventos" && "Reduzimos a franquia e blindamos a organização de shows perante o CBMSC de ponta a ponta."}
+                        {activeDeck === "projetos" && "Montamos vistorias realistas de conformidade antes de solicitar a vistoria do Corpo de Bombeiros."}
+                        {activeDeck === "treinamentos" && "Geramos certificados válidos na DAT do CBMSC de forma rápida e digital sem complicações."}
+                        {activeDeck === "consultoria" && "Garantimos conformidade em mais de 35 normas preventivas, blindando o síndico predial."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* BNI Slide 10 (MIGRAD0): Final Slide / Contacts & References (Anteriormente Slide 6) */}
+              {currentSlideIndex === 9 && (
                 <div className="slide-content final-slide text-center flex flex-col items-center justify-center w-full h-full animate-fade-in">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -1513,7 +1838,7 @@ function UnifiedApresentacaoPageContent() {
             </button>
             <button
               onClick={nextBniSlide}
-              disabled={currentSlideIndex === 5}
+              disabled={currentSlideIndex === 9}
               className={`absolute right-8 z-30 p-4 rounded-full border border-white/[0.08] bg-[#0c0d12]/80 text-gray-400 hover:text-white hover:border-white/35 transition-all shadow-2xl backdrop-blur-md ${currentSlideIndex === 5 ? "opacity-30 pointer-events-none" : "hover:scale-105 active:scale-95"}`}
             >
               <ChevronRight className="w-5 h-5" />

@@ -2564,9 +2564,7 @@ body {
    ========================================================================== */
 img[src*="murilo"] {
   object-fit: cover !important;
-  object-position: 78% 52% !important;
-  transform: scale(2.2) !important;
-  transform-origin: 78% 52% !important;
+  object-position: center 20% !important;
 }
 
 /* ==========================================================================
