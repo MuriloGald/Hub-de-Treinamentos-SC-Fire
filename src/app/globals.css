@@ -951,14 +951,14 @@ img[src*="murilo"] {
   filter: blur(10px);
 }
 
-.p-1 {
+.p-smoke.p-1 {
   width: 180px;
   height: 180px;
   left: 10%;
   animation: rise-smoke-1 5s infinite ease-out;
 }
 
-.p-2 {
+.p-smoke.p-2 {
   width: 220px;
   height: 220px;
   left: 45%;
@@ -966,7 +966,7 @@ img[src*="murilo"] {
   animation-delay: 1.5s;
 }
 
-.p-3 {
+.p-smoke.p-3 {
   width: 160px;
   height: 160px;
   right: 15%;
